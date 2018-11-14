@@ -26,14 +26,11 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         PeerService.peerService.delegate = self
     }
     
-<<<<<<< HEAD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = PeerService.peerService.myPeerId.displayName
     }
     
-=======
->>>>>>> 7bba7fdf939c9d8ab2faffc8fcbfe5798caec6ba
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
