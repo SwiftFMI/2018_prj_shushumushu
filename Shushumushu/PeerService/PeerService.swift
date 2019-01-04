@@ -24,43 +24,47 @@ class PeerService: NSObject {
     var myPeerId : MCPeerID!
     var serviceAdvertiser : MCNearbyServiceAdvertiser!
     var serviceBrowser : MCNearbyServiceBrowser!
+    var currentTimestamp: TimeInterval
    
     var foundPeers = [MCPeerID]()
    
     var delegate: PeerServiceDelegate?
     
     override init() {
+        currentTimestamp = Date().timeIntervalSince1970
+        
         super.init()
         
         myPeerId = MCPeerID(displayName: UIDevice.current.name)
-        
+    
         session = MCSession(peer: myPeerId)
         session.delegate = self
         
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["timestamp" : String(currentTimestamp)], serviceType: PeerServiceType)
         serviceAdvertiser.delegate = self
-        
+
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
         serviceBrowser.delegate = self
-        
+
         serviceAdvertiser.startAdvertisingPeer()
         serviceBrowser.startBrowsingForPeers()
     }
 
     init(_ displayName: String) {
+        currentTimestamp = Date().timeIntervalSince1970
         super.init()
         myPeerId = MCPeerID(displayName: displayName)
         
         session = MCSession(peer: myPeerId)
         session.delegate = self
         
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
-        serviceBrowser.delegate = self
-        serviceBrowser.startBrowsingForPeers()
-        
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
-        serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
+//        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
+//        serviceBrowser.delegate = self
+//        serviceBrowser.startBrowsingForPeers()
+//
+//        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
+//        serviceAdvertiser.delegate = self
+//        serviceAdvertiser.startAdvertisingPeer()
     }
     
     deinit {
@@ -72,7 +76,14 @@ class PeerService: NSObject {
 
 extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        print("\(peerID) changed state to: \(state.rawValue)")
+        switch state {
+        case .connected:
+            print("Connected: \(peerID.displayName)")
+        case .connecting:
+            print("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            print("Not connected: \(peerID.displayName)")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -94,7 +105,16 @@ extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNe
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
         foundPeers.append(peerID)
+        let timestampData: Data?
         
+        do {
+            try timestampData = NSKeyedArchiver.archivedData(withRootObject: currentTimestamp, requiringSecureCoding: false)
+        } catch {
+            timestampData = nil
+            print("Error archiving timestamp data")
+        }
+        
+        browser.invitePeer(peerID, to: session, withContext: timestampData, timeout: 30)
         delegate?.foundPeer()
     }
     
@@ -120,6 +140,20 @@ extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNe
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+//        let inviterTimestamp: TimeInterval?
+//        if let receivedContext = context {
+//            do {
+//                inviterTimestamp = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(receivedContext) as? TimeInterval
+//            } catch {
+//                inviterTimestamp = Date().timeIntervalSince1970
+//                print("Error when receiving timestamp from peer \(peerID)")
+//            }
+//        } else {
+//            inviterTimestamp = Date().timeIntervalSince1970
+//        }
+//
+//        print("Received invitation from peer \(peerID) with timestamp \(inviterTimestamp)")
+        invitationHandler(true, session)
         print("Received invitation from peer \(peerID)")
     }
     
