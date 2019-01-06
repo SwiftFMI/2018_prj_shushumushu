@@ -56,6 +56,10 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var nowInterval = Date().timeIntervalSince1970
+        let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
+        
+        PeerService.peerService.serviceBrowser.invitePeer(PeerService.peerService.foundPeers[indexPath.row], to: PeerService.peerService.session, withContext: timestampData, timeout: 30)
     }
 
     /*

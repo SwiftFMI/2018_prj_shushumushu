@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol PeerServiceDelegate {
+protocol PeerServiceDelegate: class {
     func foundPeer()
     func lostPeer(at index: Int)
 }
@@ -28,7 +28,7 @@ class PeerService: NSObject {
    
     var foundPeers = [MCPeerID]()
    
-    var delegate: PeerServiceDelegate?
+    weak var delegate: PeerServiceDelegate?
     
     override init() {
         currentTimestamp = Date().timeIntervalSince1970
@@ -37,7 +37,7 @@ class PeerService: NSObject {
         
         myPeerId = MCPeerID(displayName: UIDevice.current.name)
     
-        session = MCSession(peer: myPeerId)
+        session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["timestamp" : String(currentTimestamp)], serviceType: PeerServiceType)
@@ -68,13 +68,13 @@ class PeerService: NSObject {
     }
     
     deinit {
-        self.serviceAdvertiser.stopAdvertisingPeer()
-        self.serviceBrowser.stopBrowsingForPeers()
+        serviceAdvertiser.stopAdvertisingPeer()
+        serviceBrowser.stopBrowsingForPeers()
     }
     
 }
 
-extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
@@ -105,16 +105,18 @@ extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNe
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
         foundPeers.append(peerID)
-        let timestampData: Data?
-        
-        do {
-            try timestampData = NSKeyedArchiver.archivedData(withRootObject: currentTimestamp, requiringSecureCoding: false)
-        } catch {
-            timestampData = nil
-            print("Error archiving timestamp data")
-        }
-        
-        browser.invitePeer(peerID, to: session, withContext: timestampData, timeout: 30)
+//        let timestampData: Data?
+//
+//        do {
+//            try timestampData = NSKeyedArchiver.archivedData(withRootObject: currentTimestamp, requiringSecureCoding: false)
+//        } catch {
+//            timestampData = nil
+//            print("Error archiving timestamp data")
+//        }
+//        var nowInterval = Date().timeIntervalSince1970
+//        let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
+//        
+//        browser.invitePeer(peerID, to: session, withContext: timestampData, timeout: 30)
         delegate?.foundPeer()
     }
     
@@ -138,8 +140,12 @@ extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNe
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         print(error.localizedDescription)
     }
-    
+
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        
+        let timeInterval: Double = context!.withUnsafeBytes { $0.pointee }
+        let date = Date(timeIntervalSince1970: timeInterval)
+        
 //        let inviterTimestamp: TimeInterval?
 //        if let receivedContext = context {
 //            do {
@@ -154,7 +160,7 @@ extension PeerService :  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNe
 //
 //        print("Received invitation from peer \(peerID) with timestamp \(inviterTimestamp)")
         invitationHandler(true, session)
-        print("Received invitation from peer \(peerID)")
+        print("Received invitation from peer \(peerID) with timestamp \(date)")
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
