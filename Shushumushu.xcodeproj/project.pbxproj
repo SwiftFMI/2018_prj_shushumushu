@@ -14,6 +14,8 @@
 		4308E6322198C74D00B69050 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E6312198C74D00B69050 /* RoundedView.swift */; };
 		4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E6372198CF7600B69050 /* PeerTableViewCell.swift */; };
 		4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4310EDF6219B259000622428 /* NameEditorTableViewController.swift */; };
+		43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475AC921E3CDD3006F5B8C /* Message.swift */; };
+		43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475ACF21E69EB3006F5B8C /* ChatViewController.swift */; };
 		439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30821995D9B000BBCDD /* PeerService.swift */; };
 		43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */; };
@@ -29,6 +31,8 @@
 		4308E6312198C74D00B69050 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		4308E6372198CF7600B69050 /* PeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewCell.swift; sourceTree = "<group>"; };
 		4310EDF6219B259000622428 /* NameEditorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEditorTableViewController.swift; sourceTree = "<group>"; };
+		43475AC921E3CDD3006F5B8C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		43475ACF21E69EB3006F5B8C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		439843552198D0CB00018215 /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		43F7E30821995D9B000BBCDD /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
 		43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 				4308E61F219894A100B69050 /* AppDelegate.swift */,
 				4308E623219894A100B69050 /* Main.storyboard */,
 				4308E628219894A200B69050 /* LaunchScreen.storyboard */,
+				43475ACC21E3CE9F006F5B8C /* Chat */,
 				4310EDF4219B1E0700622428 /* ViewControllers */,
 				4310EDF3219B1DD500622428 /* PeerService */,
 				4310EDF5219B1E4000622428 /* CustomViews */,
@@ -87,6 +92,7 @@
 		4310EDF4219B1E0700622428 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				43475ACF21E69EB3006F5B8C /* ChatViewController.swift */,
 				439843552198D0CB00018215 /* PeerTableViewController.swift */,
 				4308E6372198CF7600B69050 /* PeerTableViewCell.swift */,
 				4310EDF9219B25E600622428 /* Settings */,
@@ -109,6 +115,14 @@
 				4310EDF6219B259000622428 /* NameEditorTableViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		43475ACC21E3CE9F006F5B8C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				43475AC921E3CDD3006F5B8C /* Message.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +201,9 @@
 				4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */,
 				43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */,
 				4308E620219894A100B69050 /* AppDelegate.swift in Sources */,
+				43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */,
 				4308E6322198C74D00B69050 /* RoundedView.swift in Sources */,
+				43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */,
 				439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

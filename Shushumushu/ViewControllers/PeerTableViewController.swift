@@ -60,6 +60,8 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
         
         PeerService.peerService.serviceBrowser.invitePeer(PeerService.peerService.foundPeers[indexPath.row], to: PeerService.peerService.session, withContext: timestampData, timeout: 30)
+        
+        performSegue(withIdentifier: "ChatViewController", sender: nil)
     }
 
     /*
