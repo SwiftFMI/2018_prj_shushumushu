@@ -11,12 +11,14 @@ import MultipeerConnectivity
 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var deviceName: UILabel!
+    @IBOutlet weak var initialLetterLabel: UILabel!
     @IBOutlet weak var visibilitySwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         deviceName.text = PeerService.peerService.myPeerId.displayName
+        initialLetterLabel.text = String(deviceName.text?.dropLast((deviceName.text?.count ?? 1) - 1) ?? "")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

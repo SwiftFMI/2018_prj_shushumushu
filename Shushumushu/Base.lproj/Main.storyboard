@@ -30,7 +30,7 @@
         <scene sceneID="5OX-WW-SpQ">
             <objects>
                 <tableViewController id="yu7-ma-RAD" customClass="PeerTableViewController" customModule="Shushumushu" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TUE-YG-qCP">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TUE-YG-qCP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,10 +133,23 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-BZ-6Vl" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
-                                    <rect key="frame" x="112" y="25" width="150" height="150"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-BZ-6Vl" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
+                                    <rect key="frame" x="112.5" y="25" width="150" height="150"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeD-UB-hdG">
+                                            <rect key="frame" x="61" y="45" width="28" height="61"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="51"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="top" secondItem="EWL-BZ-6Vl" secondAttribute="top" constant="45" id="Iiq-0X-peU"/>
+                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="leading" secondItem="EWL-BZ-6Vl" secondAttribute="leading" constant="61" id="NbV-Z0-sGS"/>
+                                        <constraint firstAttribute="trailing" secondItem="EeD-UB-hdG" secondAttribute="trailing" constant="61" id="YBB-17-3o6"/>
+                                        <constraint firstAttribute="bottom" secondItem="EeD-UB-hdG" secondAttribute="bottom" constant="44" id="anh-GM-M3p"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
                                             <real key="value" value="75"/>
@@ -145,6 +158,10 @@
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="centerX" secondItem="T9b-Yl-c6C" secondAttribute="centerX" id="Vfz-B0-0fs"/>
+                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="top" secondItem="T9b-Yl-c6C" secondAttribute="top" constant="25" id="dfa-k4-Yon"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="name" id="ffh-bS-8xj">
@@ -213,6 +230,7 @@
                     </tableView>
                     <connections>
                         <outlet property="deviceName" destination="L0u-XZ-Fkl" id="CDC-AS-g4v"/>
+                        <outlet property="initialLetterLabel" destination="EeD-UB-hdG" id="znt-TE-rcg"/>
                         <outlet property="visibilitySwitch" destination="8rz-gD-725" id="M21-MZ-MJS"/>
                     </connections>
                 </tableViewController>
