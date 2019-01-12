@@ -31,9 +31,11 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func didChangeVisibility(_ sender: UISwitch) {
         if sender.isOn {
             PeerService.peerService.serviceAdvertiser.startAdvertisingPeer()
+            PeerService.peerService.serviceBrowser.startBrowsingForPeers()
         }
         else {
             PeerService.peerService.serviceAdvertiser.stopAdvertisingPeer()
+            PeerService.peerService.serviceBrowser.stopBrowsingForPeers()
         }
     }
     
