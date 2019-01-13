@@ -137,7 +137,7 @@
                                     <rect key="frame" x="112.5" y="25" width="150" height="150"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeD-UB-hdG">
-                                            <rect key="frame" x="61" y="45" width="28" height="61"/>
+                                            <rect key="frame" x="61" y="44.5" width="28" height="61"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -145,10 +145,10 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="top" secondItem="EWL-BZ-6Vl" secondAttribute="top" constant="45" id="Iiq-0X-peU"/>
-                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="leading" secondItem="EWL-BZ-6Vl" secondAttribute="leading" constant="61" id="NbV-Z0-sGS"/>
-                                        <constraint firstAttribute="trailing" secondItem="EeD-UB-hdG" secondAttribute="trailing" constant="61" id="YBB-17-3o6"/>
-                                        <constraint firstAttribute="bottom" secondItem="EeD-UB-hdG" secondAttribute="bottom" constant="44" id="anh-GM-M3p"/>
+                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="centerX" secondItem="EWL-BZ-6Vl" secondAttribute="centerX" id="0Db-dJ-kWx"/>
+                                        <constraint firstAttribute="height" constant="150" id="j7a-83-KlO"/>
+                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="centerY" secondItem="EWL-BZ-6Vl" secondAttribute="centerY" id="q9w-yc-dLp"/>
+                                        <constraint firstAttribute="width" constant="150" id="qhx-uv-Sj6"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
@@ -159,8 +159,8 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="centerX" secondItem="T9b-Yl-c6C" secondAttribute="centerX" id="Vfz-B0-0fs"/>
-                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="top" secondItem="T9b-Yl-c6C" secondAttribute="top" constant="25" id="dfa-k4-Yon"/>
+                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="top" secondItem="T9b-Yl-c6C" secondAttribute="top" constant="25" id="9pt-qw-DJY"/>
+                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="centerX" secondItem="T9b-Yl-c6C" secondAttribute="centerX" id="Vpc-32-nDC"/>
                             </constraints>
                         </view>
                         <sections>

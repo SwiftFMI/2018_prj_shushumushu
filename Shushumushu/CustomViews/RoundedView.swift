@@ -11,7 +11,7 @@ import UIKit
 class RoundedView: UIView {
     @IBInspectable var roundedCorners: CGFloat = 0.0 {
         didSet {
-            layer.cornerRadius = roundedCorners;
+            layer.cornerRadius = roundedCorners
         }
     }
 }
