@@ -10,12 +10,12 @@ import UIKit
 import MultipeerConnectivity
 
 class ChatViewController: UIViewController {
-    var chatPartner: MCPeerID?
+    @IBOutlet weak var textField: UITextField!
+     var chatPartner: MCPeerID?
     
     required init?(coder aDecoder: NSCoder) {
         chatPartner = nil
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
     }
 
     
@@ -23,5 +23,14 @@ class ChatViewController: UIViewController {
         super.viewWillAppear(animated)
         print("Initiated chat with: \(String(describing: chatPartner))")
     }
-
+    
+    @IBAction func buttonSelected(_ sender: Any) {
+        let messageData = textField.text?.data(using: String.Encoding.utf8)
+        do {
+            try PeerService.peerService.session.send(messageData!, toPeers: [chatPartner!], with: MCSessionSendDataMode.reliable)
+        } catch {
+            print("Error sending message")
+        }
+    }
+    
 }

@@ -13,7 +13,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var initialLetterLabel: UILabel!
     @IBOutlet weak var visibilitySwitch: UISwitch!
-        
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         deviceName.text = PeerService.peerService.myPeerId.displayName
@@ -46,7 +46,7 @@ class SettingsTableViewController: UITableViewController {
 
 extension SettingsTableViewController: NameEditorTableViewControllerDelegate {
     func NameEditorTableViewControllerDelegateDidUpdatePeerService(_ nameEditorTableViewController: NameEditorTableViewController) {
-        deviceName.text = PeerService.peerService.myPeerId.displayName
+        deviceName.text = PeerService.peerService.myPeerId.displayName  
     }
 }
 

@@ -27,7 +27,8 @@ class PeerService: NSObject {
     var currentTimestamp: TimeInterval
    
     var foundPeers = [MCPeerID]()
-   
+    var messages = [Message]()
+    
     weak var delegate: PeerServiceDelegate?
     
     override init() {
@@ -58,13 +59,13 @@ class PeerService: NSObject {
         session = MCSession(peer: myPeerId)
         session.delegate = self
         
-//        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
-//        serviceBrowser.delegate = self
-//        serviceBrowser.startBrowsingForPeers()
-//
-//        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
-//        serviceAdvertiser.delegate = self
-//        serviceAdvertiser.startAdvertisingPeer()
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
+
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["timestamp" : String(currentTimestamp)], serviceType: PeerServiceType)
+        serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
     }
     
     deinit {
@@ -88,6 +89,8 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Received data from: \(peerID)")
+        let receivedMessage = String(decoding: data, as: UTF8.self)
+        print(receivedMessage)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

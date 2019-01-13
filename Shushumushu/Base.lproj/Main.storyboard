@@ -112,10 +112,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOF-OP-MXX">
+                                <rect key="frame" x="164" y="337" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonSelected:" destination="7Zw-Hn-YaD" eventType="touchUpInside" id="YI1-C3-ejL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cYv-6y-oBh"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="b51-Wb-lfn" id="M6I-Yu-4y1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k2W-5v-Sgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
