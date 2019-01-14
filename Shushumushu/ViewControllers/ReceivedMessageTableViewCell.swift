@@ -11,10 +11,13 @@ import UIKit
 class ReceivedMessageTableViewCell: UITableViewCell {
     //Mark - Properties
     @IBOutlet weak var messageText: UILabel!
+    @IBOutlet weak var roundedView: RoundedView!
+    @IBOutlet weak var timestampLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        roundedView.roundedCorners = 10 * CGFloat(integerLiteral: messageText.calculateMaxLines())
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

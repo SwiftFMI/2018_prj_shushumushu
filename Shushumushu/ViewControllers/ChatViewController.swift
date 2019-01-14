@@ -13,7 +13,6 @@ class ChatViewController: UIViewController {
     var chatPartner: MCPeerID?
     var bottomConstraint: NSLayoutConstraint?
     
-    
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var chatTableView: UITableView!
     
@@ -136,7 +135,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                   fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
             }
             cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
-            
+            cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {
@@ -144,9 +143,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
-            
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func numberOfMessages(fromAndTo peer: MCPeerID) -> Int {
@@ -165,4 +167,27 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension Notification.Name {
     static let messageReceived = Notification.Name("message-received")
+}
+
+extension UILabel {
+    func calculateMaxLines() -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        let text = (self.text ?? "") as NSString
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
+    } 
+}
+
+extension TimeInterval {
+    func toString() -> String {
+        let date = Date(timeIntervalSince1970: self)
+        
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "hh:mm"
+        let dateString = dayTimePeriodFormatter.string(from: date)
+        
+        return dateString
+    }
 }
