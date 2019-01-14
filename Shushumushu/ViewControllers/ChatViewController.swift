@@ -83,7 +83,7 @@ class ChatViewController: UIViewController {
             let isKeboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             
             self.bottomConstraint?.constant = isKeboardShowing ? -keyboardHeight : 0
-            tableViewBottomConstraint.constant = isKeboardShowing ? (-keyboardHeight - 48) : -48
+            tableViewBottomConstraint.constant = isKeboardShowing ? (+keyboardHeight + 48) : +48
             self.chatTableView.updateConstraints()
             
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
