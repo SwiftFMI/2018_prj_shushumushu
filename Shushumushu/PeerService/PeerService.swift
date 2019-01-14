@@ -90,6 +90,8 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Received data from: \(peerID)")
         let receivedMessage = String(decoding: data, as: UTF8.self)
+        let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
+        messages.append(newMessage)
         print(receivedMessage)
     }
     

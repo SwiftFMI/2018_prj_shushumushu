@@ -46,7 +46,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PeerTableViewCell else {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
         }
-
+        
         let peer: MCPeerID = PeerService.peerService.foundPeers[indexPath.row]
         cell.peerName.text = peer.displayName
         cell.peerNameInitialLetter.text = String(peer.displayName.dropLast(peer.displayName.count - 1))

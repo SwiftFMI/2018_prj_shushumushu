@@ -12,11 +12,13 @@ import MultipeerConnectivity
 class Message: NSObject {
     let sender: MCPeerID
     let receiver: MCPeerID
+    let text: String
     let timestamp: TimeInterval
     
-    init(sender: MCPeerID, receiver: MCPeerID) {
+    init(sender: MCPeerID, receiver: MCPeerID, text: String) {
         self.sender = sender
         self.receiver = receiver
+        self.text = text
         timestamp = Date().timeIntervalSince1970
     }
 }
