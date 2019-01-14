@@ -66,11 +66,15 @@ class ChatViewController: UIViewController {
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[sendButton]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[inputTextField][sendButton(60)]|", options: [], metrics: nil, views: views))
         
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(messageReceivedAction), name: Notification.Name.messageReceived, object: nil)
+    }
+    
+    @objc func messageReceivedAction(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.chatTableView.insertRows(at: [IndexPath(row: self.numberOfMessages(fromAndTo: self.chatPartner!) - 1, section: 0)], with: .automatic)
+        }
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
@@ -86,14 +90,13 @@ class ChatViewController: UIViewController {
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
                 self.chatTableView.layoutIfNeeded()
-                
-            }, completion: { (completed) in
-                
-            })
+            }, completion: { (completed) in })
         }
-        
     }
     
+    @IBAction func tableViewTapped(_ sender: Any) {
+        view.endEditing(true)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,6 +114,9 @@ class ChatViewController: UIViewController {
                 try PeerService.peerService.session.send(messageData, toPeers: [messageReceiver], with: .reliable)
                 let newMessage = Message(sender: PeerService.peerService.myPeerId, receiver: chatPartner!, text: inputTextField.text!)
                 PeerService.peerService.messages.append(newMessage)
+                DispatchQueue.main.async {
+                    self.chatTableView.insertRows(at: [IndexPath(row: self.numberOfMessages(fromAndTo: self.chatPartner!) - 1, section: 0)], with: .automatic)
+                }
             } catch {
                 print("Error sending message")
             }
@@ -155,4 +161,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         return numberOfMessages
     }
     
+}
+
+extension Notification.Name {
+    static let messageReceived = Notification.Name("message-received")
 }

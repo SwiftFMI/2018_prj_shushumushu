@@ -92,6 +92,7 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
         let receivedMessage = String(decoding: data, as: UTF8.self)
         let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
         messages.append(newMessage)
+        NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
         print(receivedMessage)
     }
     
