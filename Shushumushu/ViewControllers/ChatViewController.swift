@@ -73,7 +73,12 @@ class ChatViewController: UIViewController {
     @objc func messageReceivedAction(_ notification: Notification) {
         DispatchQueue.main.async {
             self.chatTableView.insertRows(at: [IndexPath(row: self.numberOfMessages(fromAndTo: self.chatPartner!) - 1, section: 0)], with: .automatic)
+            if self.previousMessageIsAtBottom() {
+                self.scrollToBottom(true)
+            }
         }
+        
+        
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
@@ -82,7 +87,6 @@ class ChatViewController: UIViewController {
             let keyboardHeight = keyboardRectangle.height
             let isKeboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             
-         
             self.bottomConstraint?.constant = isKeboardShowing ? -keyboardHeight : 0
             tableViewBottomConstraint.constant = isKeboardShowing ? (+keyboardHeight + 48) : +48
             self.chatTableView.updateConstraints()
@@ -92,10 +96,36 @@ class ChatViewController: UIViewController {
                 self.chatTableView.layoutIfNeeded()
             }, completion: { (completed) in })
             
-            if chatTableView.numberOfRows(inSection: 0) > 0 {
-                chatTableView.scrollToRow(at: IndexPath(row: chatTableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+            scrollToBottom(true)
+        }
+    }
+    
+    ///Checks if the message before the last one is at the bottom
+    func previousMessageIsAtBottom() -> Bool {
+        var previousMessageIsAtBottom = false
+        
+        if self.chatTableView.numberOfRows(inSection: 0) > 1 {
+            let previousMessage = self.chatTableView.rectForRow(at: IndexPath(row: self.chatTableView.numberOfRows(inSection: 0) - 2, section: 0))
+            let screen = UIScreen.main.bounds
+            let previousMessageInScreen = self.chatTableView.convert(previousMessage, to: self.chatTableView.superview)
+            if screen.height > previousMessageInScreen.minY {
+                print("Setting previousMessageIsAtBottom to TRUE")
+                previousMessageIsAtBottom = true
             }
         }
+    
+        return previousMessageIsAtBottom
+    }
+    
+    ///Scrolls ChatTableView to the bottom
+    func scrollToBottom(_ animated: Bool) {
+        DispatchQueue.main.async{
+            if self.chatTableView.numberOfRows(inSection: 0) > 0 {
+                self.chatTableView.scrollToRow(at: IndexPath(row: self.chatTableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: animated)
+            }
+        }
+        
+        print("Scrolled to bottom")
     }
     
     @IBAction func tableViewTapped(_ sender: Any) {
@@ -108,6 +138,7 @@ class ChatViewController: UIViewController {
         chatTableView.dataSource = self
         chatTableView.delegate = self
         chatTableView.reloadData()
+        scrollToBottom(false)
     }
     
     @objc func sendButtonTapped(_ sender: Any) {
@@ -126,6 +157,7 @@ class ChatViewController: UIViewController {
             }
         }
         inputTextField.text = ""
+        scrollToBottom(true)
     }
 }
 
@@ -139,6 +171,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageTableViewCell", for: indexPath) as? ReceivedMessageTableViewCell else {
                   fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
             }
+            
             cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
             cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
             return cell
@@ -148,6 +181,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
+            cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
             return cell
         }
     }
@@ -160,7 +194,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         var numberOfMessages = 0
         
         for message in PeerService.peerService.messages {
-            if message.sender == chatPartner || message.sender == PeerService.peerService.myPeerId || message.receiver == chatPartner || message.receiver == PeerService.peerService.myPeerId {
+            if (message.sender == chatPartner && message.receiver == PeerService.peerService.myPeerId) || (message.sender == PeerService.peerService.myPeerId && message.receiver == chatPartner) {
                 numberOfMessages += 1
             }
         }

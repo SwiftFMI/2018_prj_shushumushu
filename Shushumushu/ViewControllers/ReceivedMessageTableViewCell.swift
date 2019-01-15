@@ -16,7 +16,6 @@ class ReceivedMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         roundedView.roundedCorners = 10 * CGFloat(integerLiteral: messageText.calculateMaxLines())
     }
 
