@@ -47,6 +47,20 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAditionalViews()
+        addNotificationObservers()
+    }
+    
+    func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(messageReceivedAction), name: Notification.Name.messageReceived, object: nil)
+    }
+    
+    func setupAditionalViews() {
+        messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
+        inputTextField.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         
         let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton]
         view.addSubview(messageInputContainerView)
@@ -55,19 +69,11 @@ class ChatViewController: UIViewController {
         bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
         
-        messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[inputTextField]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[sendButton]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[inputTextField][sendButton(60)]|", options: [], metrics: nil, views: views))
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(messageReceivedAction), name: Notification.Name.messageReceived, object: nil)
     }
     
     @objc func messageReceivedAction(_ notification: Notification) {
@@ -77,8 +83,6 @@ class ChatViewController: UIViewController {
                 self.scrollToBottom(true)
             }
         }
-        
-        
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
