@@ -82,6 +82,7 @@ class ChatViewController: UIViewController {
             let keyboardHeight = keyboardRectangle.height
             let isKeboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             
+         
             self.bottomConstraint?.constant = isKeboardShowing ? -keyboardHeight : 0
             tableViewBottomConstraint.constant = isKeboardShowing ? (+keyboardHeight + 48) : +48
             self.chatTableView.updateConstraints()
@@ -90,6 +91,10 @@ class ChatViewController: UIViewController {
                 self.view.layoutIfNeeded()
                 self.chatTableView.layoutIfNeeded()
             }, completion: { (completed) in })
+            
+            if chatTableView.numberOfRows(inSection: 0) > 0 {
+                chatTableView.scrollToRow(at: IndexPath(row: chatTableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+            }
         }
     }
     
