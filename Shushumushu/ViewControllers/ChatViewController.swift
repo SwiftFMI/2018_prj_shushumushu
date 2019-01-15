@@ -47,6 +47,7 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = chatPartner?.displayName
         setupAditionalViews()
         addNotificationObservers()
     }
