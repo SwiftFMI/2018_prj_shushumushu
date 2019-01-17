@@ -21,6 +21,7 @@
 		43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */; };
 		43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30821995D9B000BBCDD /* PeerService.swift */; };
 		43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */; };
+		E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C6EFC521F095D50028662F /* SetupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageTableViewCell.swift; sourceTree = "<group>"; };
 		43F7E30821995D9B000BBCDD /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
 		43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E5C6EFC521F095D50028662F /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				43475ACF21E69EB3006F5B8C /* ChatViewController.swift */,
+				E5C6EFC521F095D50028662F /* SetupViewController.swift */,
 				439843552198D0CB00018215 /* PeerTableViewController.swift */,
 				4308E6372198CF7600B69050 /* PeerTableViewCell.swift */,
 				43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */,
@@ -206,6 +209,7 @@
 				4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */,
 				43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */,
 				4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */,
+				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,
 				43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */,
 				4308E620219894A100B69050 /* AppDelegate.swift in Sources */,
 				43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */,
@@ -361,6 +365,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L24TQ8W95;
 				INFOPLIST_FILE = Shushumushu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,6 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L24TQ8W95;
 				INFOPLIST_FILE = Shushumushu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
