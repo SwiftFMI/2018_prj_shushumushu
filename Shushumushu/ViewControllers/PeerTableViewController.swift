@@ -22,6 +22,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.title = PeerService.peerService.myPeerId.displayName
         PeerService.peerService.delegate = self
     }

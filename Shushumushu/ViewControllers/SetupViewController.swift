@@ -55,10 +55,7 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
             UserDefaults.standard.set(username.text, forKey: "username")
             let pngImage = pickedImage.image!.pngData()
             UserDefaults.standard.set(pngImage, forKey: "profilePic")
-            
-            let nextStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = nextStoryboard.instantiateViewController(withIdentifier: "NearbyDevices") as! PeerTableViewController
-            present(viewController, animated: true, completion: nil)
+            performSegue(withIdentifier: "NearbyDevices", sender: nil)
         } else {
             let noPictureAlert = UIAlertController(title: "Oops", message: "You don't have a picture.", preferredStyle: .alert)
             noPictureAlert.addAction(UIAlertAction(title: "Ok, I'll add one now :)", style: .default, handler: nil))
