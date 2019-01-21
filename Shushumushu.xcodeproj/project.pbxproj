@@ -21,6 +21,7 @@
 		43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */; };
 		43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30821995D9B000BBCDD /* PeerService.swift */; };
 		43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */; };
+		E5B9D75221F602E4008EAB0D /* PeerTableViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C6EFC521F095D50028662F /* SetupViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B9D75221F602E4008EAB0D /* PeerTableViewController.swift in Resources */,
 				4308E62A219894A200B69050 /* LaunchScreen.storyboard in Resources */,
 				4308E627219894A200B69050 /* Assets.xcassets in Resources */,
 				4308E625219894A100B69050 /* Main.storyboard in Resources */,
