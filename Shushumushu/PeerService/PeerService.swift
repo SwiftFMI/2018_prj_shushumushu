@@ -36,7 +36,7 @@ class PeerService: NSObject {
         
         super.init()
         
-        myPeerId = MCPeerID(displayName: UIDevice.current.name)
+        myPeerId = MCPeerID(displayName: UserDefaults.standard.string(forKey: "username")!)
     
         session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
