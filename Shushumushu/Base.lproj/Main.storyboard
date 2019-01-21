@@ -338,44 +338,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="T9b-Yl-c6C">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-BZ-6Vl" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
-                                    <rect key="frame" x="112.5" y="25" width="150" height="150"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeD-UB-hdG">
-                                            <rect key="frame" x="61" y="44.5" width="28" height="61"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="51"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PvL-gE-2kp">
+                                    <rect key="frame" x="87.5" y="25" width="200" height="200"/>
                                     <constraints>
-                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="centerX" secondItem="EWL-BZ-6Vl" secondAttribute="centerX" id="0Db-dJ-kWx"/>
-                                        <constraint firstAttribute="height" constant="150" id="j7a-83-KlO"/>
-                                        <constraint firstItem="EeD-UB-hdG" firstAttribute="centerY" secondItem="EWL-BZ-6Vl" secondAttribute="centerY" id="q9w-yc-dLp"/>
-                                        <constraint firstAttribute="width" constant="150" id="qhx-uv-Sj6"/>
+                                        <constraint firstAttribute="width" constant="200" id="XgK-t8-M6N"/>
+                                        <constraint firstAttribute="height" constant="200" id="eJI-Yu-ZE5"/>
                                     </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
-                                            <real key="value" value="75"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="top" secondItem="T9b-Yl-c6C" secondAttribute="top" constant="25" id="9pt-qw-DJY"/>
-                                <constraint firstItem="EWL-BZ-6Vl" firstAttribute="centerX" secondItem="T9b-Yl-c6C" secondAttribute="centerX" id="Vpc-32-nDC"/>
+                                <constraint firstItem="PvL-gE-2kp" firstAttribute="top" secondItem="T9b-Yl-c6C" secondAttribute="top" constant="25" id="ezi-Dc-hfx"/>
+                                <constraint firstItem="PvL-gE-2kp" firstAttribute="centerX" secondItem="T9b-Yl-c6C" secondAttribute="centerX" id="yWm-u4-73o"/>
                             </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="name" id="ffh-bS-8xj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="deviceName" textLabel="L0u-XZ-Fkl" style="IBUITableViewCellStyleDefault" id="OzF-fQ-nFg">
-                                        <rect key="frame" x="0.0" y="230.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="275.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OzF-fQ-nFg" id="YRK-ta-yXA">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -399,7 +383,7 @@
                             <tableViewSection headerTitle="Device settings" id="LbB-Yq-472">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="toggleVisibility" id="VA6-Vr-Zp1">
-                                        <rect key="frame" x="0.0" y="330.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="375.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VA6-Vr-Zp1" id="DDK-hl-3xW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -438,7 +422,7 @@
                     </tableView>
                     <connections>
                         <outlet property="deviceName" destination="L0u-XZ-Fkl" id="CDC-AS-g4v"/>
-                        <outlet property="initialLetterLabel" destination="EeD-UB-hdG" id="znt-TE-rcg"/>
+                        <outlet property="profilePicture" destination="PvL-gE-2kp" id="f8T-g1-gxe"/>
                         <outlet property="visibilitySwitch" destination="8rz-gD-725" id="M21-MZ-MJS"/>
                     </connections>
                 </tableViewController>

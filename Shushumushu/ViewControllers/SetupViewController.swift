@@ -16,7 +16,7 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickedImage.layer.cornerRadius = pickedImage.frame.size.width/2
+        pickedImage.layer.cornerRadius = pickedImage.frame.size.width / 2
         pickedImage.layer.masksToBounds = true
     }
     
