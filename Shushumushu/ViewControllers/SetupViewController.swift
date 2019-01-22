@@ -63,4 +63,7 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
         }
     }
     
+    @IBAction func backgroundTapAction(_ sender: Any) {
+        view.endEditing(true)
+    }
 }
