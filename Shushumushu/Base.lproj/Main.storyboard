@@ -20,8 +20,9 @@
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RdJ-RL-kg2">
                                 <rect key="frame" x="50" y="221" width="275" height="275"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="275" id="8Xg-7r-6ER"/>
-                                    <constraint firstAttribute="height" constant="275" id="oXl-K5-2XO"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="275" id="8Xg-7r-6ER"/>
+                                    <constraint firstAttribute="width" secondItem="RdJ-RL-kg2" secondAttribute="height" multiplier="1:1" id="g2A-7C-Xmc"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="oXl-K5-2XO"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yKj-Yw-e3x">
@@ -82,6 +83,7 @@
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yEd-ZR-9x1" secondAttribute="trailing" constant="60" id="6Um-lY-YT3"/>
                             <constraint firstItem="RdJ-RL-kg2" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="7Ou-4M-1I5"/>
                             <constraint firstItem="yKj-Yw-e3x" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="J8O-zr-sdR"/>
+                            <constraint firstItem="4AU-1r-hhO" firstAttribute="bottom" secondItem="yEd-ZR-9x1" secondAttribute="bottom" constant="42" id="Qee-2P-kCF"/>
                             <constraint firstItem="nsQ-fP-xzo" firstAttribute="top" secondItem="4AU-1r-hhO" secondAttribute="top" constant="32" id="Xyy-Rx-u6n"/>
                             <constraint firstItem="yEd-ZR-9x1" firstAttribute="top" secondItem="RdJ-RL-kg2" secondAttribute="bottom" constant="24" id="bcx-qO-Tt3"/>
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yKj-Yw-e3x" secondAttribute="trailing" constant="55" id="gaW-f2-7jt"/>
