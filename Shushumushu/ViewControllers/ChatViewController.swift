@@ -11,6 +11,7 @@ import MultipeerConnectivity
 
 class ChatViewController: UIViewController {
     var chatPartner: MCPeerID?
+    var chatPartnerProfilePicture: UIImage?
     var bottomConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -48,8 +49,20 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = chatPartner?.displayName
+        chatPartnerProfilePicture = getProfilePicture(chatPartner!)
         setupAditionalViews()
         addNotificationObservers()
+    }
+    
+    func getProfilePicture(_ peerID: MCPeerID) -> UIImage? {
+        var profilePicture: UIImage?
+        for (index, peer) in PeerService.peerService.foundPeers.enumerated() {
+            if peer == chatPartner {
+                profilePicture = PeerService.peerService.profilePictures[index]
+                break
+            }
+        }
+        return profilePicture
     }
     
     func addNotificationObservers() {
@@ -179,6 +192,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
             cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
+            cell.profilePicture.image = chatPartnerProfilePicture
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {

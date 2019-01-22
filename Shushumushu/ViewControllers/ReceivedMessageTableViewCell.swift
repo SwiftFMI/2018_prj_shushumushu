@@ -13,10 +13,13 @@ class ReceivedMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var messageText: UILabel!
     @IBOutlet weak var roundedView: RoundedView!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         roundedView.roundedCorners = 10 * CGFloat(integerLiteral: messageText.calculateMaxLines())
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
