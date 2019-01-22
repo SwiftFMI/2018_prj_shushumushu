@@ -39,10 +39,9 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PeerService.peerService.foundPeers.count
+        return PeerService.peerService.profilePictures.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PeerTableViewCell else {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
@@ -50,8 +49,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         
         let peer: MCPeerID = PeerService.peerService.foundPeers[indexPath.row]
         cell.peerName.text = peer.displayName
-        cell.peerNameInitialLetter.text = String(peer.displayName.dropLast(peer.displayName.count - 1))
-        
+        cell.profilePicture.image = PeerService.peerService.profilePictures[indexPath.row]
         return cell
     }
     

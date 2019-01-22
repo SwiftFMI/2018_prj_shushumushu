@@ -28,6 +28,7 @@ class PeerService: NSObject {
    
     var foundPeers = [MCPeerID]()
     var messages = [Message]()
+    var profilePictures = [UIImage]()
     
     weak var delegate: PeerServiceDelegate?
     
@@ -73,6 +74,11 @@ class PeerService: NSObject {
         serviceBrowser.stopBrowsingForPeers()
     }
     
+    func sendProfilePicture(to peerID: MCPeerID) {
+        let profilePictureData = UserDefaults.standard.data(forKey: "profilePic")!
+        serviceBrowser.invitePeer(peerID, to: session, withContext: profilePictureData, timeout: 10)
+    }
+    
 }
 
 extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
@@ -89,11 +95,17 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Received data from: \(peerID)")
-        let receivedMessage = String(decoding: data, as: UTF8.self)
-        let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
-        messages.append(newMessage)
-        NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
-        print(receivedMessage)
+    
+        if let receivedProfilePic = UIImage(data: data){
+            profilePictures.append(receivedProfilePic)
+        }
+        else {
+            let receivedMessage = String(decoding: data, as: UTF8.self)
+            let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
+            messages.append(newMessage)
+            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
+            print(receivedMessage)
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -110,20 +122,7 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
-        foundPeers.append(peerID)
-//        let timestampData: Data?
-//
-//        do {
-//            try timestampData = NSKeyedArchiver.archivedData(withRootObject: currentTimestamp, requiringSecureCoding: false)
-//        } catch {
-//            timestampData = nil
-//            print("Error archiving timestamp data")
-//        }
-//        var nowInterval = Date().timeIntervalSince1970
-//        let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
-//        
-//        browser.invitePeer(peerID, to: session, withContext: timestampData, timeout: 30)
-        delegate?.foundPeer()
+        self.sendProfilePicture(to: peerID)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -139,6 +138,7 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
             }
         }
         
+        profilePictures.remove(at: atIndex)
         delegate?.lostPeer(at: atIndex)
         
     }
@@ -148,23 +148,21 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     }
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        
         let timeInterval: Double = context!.withUnsafeBytes { $0.pointee }
         let date = Date(timeIntervalSince1970: timeInterval)
         
-//        let inviterTimestamp: TimeInterval?
-//        if let receivedContext = context {
-//            do {
-//                inviterTimestamp = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(receivedContext) as? TimeInterval
-//            } catch {
-//                inviterTimestamp = Date().timeIntervalSince1970
-//                print("Error when receiving timestamp from peer \(peerID)")
-//            }
-//        } else {
-//            inviterTimestamp = Date().timeIntervalSince1970
-//        }
-//
-//        print("Received invitation from peer \(peerID) with timestamp \(inviterTimestamp)")
+        if let contextData = context {
+            if let profilePicture = UIImage(data: contextData) {
+                print("Received profile picture from peer \(peerID) with timestamp \(date)")
+                profilePictures.append(profilePicture)
+                foundPeers.append(peerID)
+                delegate?.foundPeer()
+                invitationHandler(false, session)
+                return
+            }
+        }
+        
+        
         invitationHandler(true, session)
         print("Received invitation from peer \(peerID) with timestamp \(date)")
     }

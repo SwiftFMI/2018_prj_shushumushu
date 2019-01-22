@@ -8,7 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
-
+ 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var visibilitySwitch: UISwitch!
@@ -17,7 +17,11 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         deviceName.text = PeerService.peerService.myPeerId.displayName
-        profilePicture.image = UIImage(data: UserDefaults.standard.data(forKey: "profilePic")!)
+        
+        if let profilePictureData = UserDefaults.standard.data(forKey: "profilePic") {
+            profilePicture.image = UIImage(data: profilePictureData)
+        }
+        
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.layer.masksToBounds = true
     }

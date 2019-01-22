@@ -11,10 +11,12 @@ import UIKit
 class PeerTableViewCell: UITableViewCell {
     //Mark: Properties
     @IBOutlet weak var peerName: UILabel!
-    @IBOutlet weak var peerNameInitialLetter: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

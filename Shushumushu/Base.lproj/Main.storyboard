@@ -123,37 +123,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoC-4k-DvR" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="14" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm9-v9-Z2t">
-                                                    <rect key="frame" x="20" y="15" width="11" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.41051112540000001" green="0.66779549530000004" blue="0.93997858499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
-                                                    <real key="value" value="25"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6X-gr-h4J">
-                                            <rect key="frame" x="74" y="20" width="245" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6X-gr-h4J">
+                                            <rect key="frame" x="76" y="21.5" width="257" height="22.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FaT-wf-8at">
+                                            <rect key="frame" x="8" y="10.5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="PXg-XF-Pfb"/>
+                                                <constraint firstAttribute="width" constant="60" id="eYh-Hw-Dpq"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="K6X-gr-h4J" secondAttribute="trailing" id="B1D-Xz-Ufk"/>
+                                        <constraint firstItem="K6X-gr-h4J" firstAttribute="leading" secondItem="FaT-wf-8at" secondAttribute="trailing" constant="8" id="D1P-SW-ag2"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="K6X-gr-h4J" secondAttribute="bottom" constant="26" id="JA1-3r-Orv"/>
+                                        <constraint firstItem="FaT-wf-8at" firstAttribute="top" secondItem="CNN-aL-28H" secondAttribute="top" constant="10" id="QPW-H8-bVX"/>
+                                        <constraint firstAttribute="bottom" secondItem="FaT-wf-8at" secondAttribute="bottom" constant="10" id="dT0-ge-jXR"/>
+                                        <constraint firstItem="K6X-gr-h4J" firstAttribute="top" secondItem="CNN-aL-28H" secondAttribute="topMargin" constant="10" id="drH-Ho-xai"/>
+                                        <constraint firstItem="FaT-wf-8at" firstAttribute="centerY" secondItem="CNN-aL-28H" secondAttribute="centerY" id="kIA-l6-0Fg"/>
+                                        <constraint firstItem="FaT-wf-8at" firstAttribute="leading" secondItem="CNN-aL-28H" secondAttribute="leading" constant="8" id="svz-WL-TIJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="peerName" destination="K6X-gr-h4J" id="3ub-pA-stg"/>
-                                    <outlet property="peerNameInitialLetter" destination="Vm9-v9-Z2t" id="S13-p0-8mV"/>
+                                    <outlet property="profilePicture" destination="FaT-wf-8at" id="NCN-A7-1v6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -422,7 +419,7 @@
                     </tableView>
                     <connections>
                         <outlet property="deviceName" destination="L0u-XZ-Fkl" id="CDC-AS-g4v"/>
-                        <outlet property="profilePicture" destination="PvL-gE-2kp" id="f8T-g1-gxe"/>
+                        <outlet property="profilePicture" destination="PvL-gE-2kp" id="Ykp-oc-KJo"/>
                         <outlet property="visibilitySwitch" destination="8rz-gD-725" id="M21-MZ-MJS"/>
                     </connections>
                 </tableViewController>
