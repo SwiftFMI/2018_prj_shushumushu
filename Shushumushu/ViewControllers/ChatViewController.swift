@@ -39,7 +39,7 @@ class ChatViewController: UIViewController {
     
     let sendButton: UIButton = {
         let sendButton = UIButton()
-        sendButton.setTitle("Send", for: .normal)
+        sendButton.setTitle("👍", for: .normal)
         let titleColor = UIColor.blue
         sendButton.setTitleColor(titleColor, for: .normal)
         sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -76,6 +76,7 @@ class ChatViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(messageReceivedAction), name: Notification.Name.messageReceived, object: nil)
+        inputTextField.addTarget(self, action: #selector(textFieldDidChangeAction), for: .editingChanged)
     }
     
     func setupAditionalViews() {
@@ -100,6 +101,20 @@ class ChatViewController: UIViewController {
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[inputTextField]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[sendButton]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[inputTextField][sendButton(60)]|", options: [], metrics: nil, views: views))
+    }
+    
+    @objc func textFieldDidChangeAction(_ textfield: UITextField) {
+        if textfield.text != "" {
+            UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
+                self.sendButton.setTitle("Send", for: .normal)
+            }, completion: nil)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                UIView.transition(with: self.sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
+                    self.sendButton.setTitle("👍", for: .normal)
+                }, completion: nil)
+            }
+        }
     }
     
     @objc func messageReceivedAction(_ notification: Notification) {
@@ -174,6 +189,8 @@ class ChatViewController: UIViewController {
     @objc func sendButtonTapped(_ sender: Any) {
         guard let messageReceiver = chatPartner else { return }
         
+        if inputTextField.text == "" { inputTextField.text = "👍" }
+        
         if let messageData = inputTextField.text?.data(using: .utf8) {
             do {
                 try PeerService.peerService.session.send(messageData, toPeers: [messageReceiver], with: .reliable)
@@ -187,6 +204,9 @@ class ChatViewController: UIViewController {
             }
         }
         inputTextField.text = ""
+        UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
+            self.sendButton.setTitle("👍", for: .normal)
+        }, completion: nil)
         scrollToBottom(true)
     }
 }
