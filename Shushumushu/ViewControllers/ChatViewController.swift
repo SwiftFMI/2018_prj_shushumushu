@@ -12,21 +12,22 @@ import MultipeerConnectivity
 class ChatViewController: UIViewController {
     var chatPartner: MCPeerID?
     var chatPartnerProfilePicture: UIImage?
-    var bottomConstraint: NSLayoutConstraint?
+    var messageInputContainerBottomConstraint: NSLayoutConstraint?
+    var separatorBottomConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var chatTableView: UITableView!
     
     required init?(coder aDecoder: NSCoder) {
         chatPartner = nil
-        bottomConstraint = nil
-        
+        messageInputContainerBottomConstraint = nil
+        separatorBottomConstraint = nil
         super.init(coder: aDecoder)
     }
     
     let messageInputContainerView: UIView = {
         let messageInputContainerView = UIView()
-        messageInputContainerView.backgroundColor = UIColor.lightGray
+        messageInputContainerView.backgroundColor = UIColor.init(white: 19/20, alpha: 1)
         return messageInputContainerView
     }()
     
@@ -44,6 +45,12 @@ class ChatViewController: UIViewController {
         sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         return sendButton
+    }()
+    
+    let separator: UIView = {
+        let separator = UIView()
+        separator.backgroundColor = UIColor.init(white: 13/15, alpha: 1)
+        return separator
     }()
     
     override func viewDidLoad() {
@@ -75,13 +82,18 @@ class ChatViewController: UIViewController {
         messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
+        separator.translatesAutoresizingMaskIntoConstraints = false
         
-        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton]
+        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton, "separator": separator]
         view.addSubview(messageInputContainerView)
+        view.addSubview(separator)
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[separator]|", options: [], metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[messageInputContainerView]|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[messageInputContainerView(48)]-0-[view]", options: [], metrics: nil, views: views))
-        bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-        view.addConstraint(bottomConstraint!)
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[separator(1)]-[messageInputContainerView(48)]-0-[view]", options: [], metrics: nil, views: views))
+        messageInputContainerBottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        separatorBottomConstraint = NSLayoutConstraint(item: separator, attribute: .bottom, relatedBy: .equal, toItem: messageInputContainerView, attribute: .top, multiplier: 1, constant: 0)
+        view.addConstraint(messageInputContainerBottomConstraint!)
+        view.addConstraint(separatorBottomConstraint!)
         
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
@@ -105,7 +117,7 @@ class ChatViewController: UIViewController {
             let keyboardHeight = keyboardRectangle.height
             let isKeboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             
-            self.bottomConstraint?.constant = isKeboardShowing ? -keyboardHeight : 0
+            self.messageInputContainerBottomConstraint?.constant = isKeboardShowing ? -keyboardHeight : 0
             tableViewBottomConstraint.constant = isKeboardShowing ? (+keyboardHeight + 48) : +48
             self.chatTableView.updateConstraints()
             
