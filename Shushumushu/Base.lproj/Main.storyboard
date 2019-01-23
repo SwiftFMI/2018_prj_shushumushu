@@ -370,6 +370,45 @@
                                             <outlet property="timestampLabel" destination="teb-e1-hPQ" id="LkF-lR-ntw"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentEmojiTableViewCell" rowHeight="80" id="gpC-Z2-ipM" customClass="SentEmojiTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="268" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gpC-Z2-ipM" id="bg1-HL-ff9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZi-Eb-Srm">
+                                                    <rect key="frame" x="333" y="11" width="19" height="53"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7t-mh-3f9">
+                                                    <rect key="frame" x="328" y="63" width="31" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="sjk-O1-B3t"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yZi-Eb-Srm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bg1-HL-ff9" secondAttribute="leadingMargin" constant="60" id="F36-U3-2zp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yZi-Eb-Srm" secondAttribute="bottom" constant="5" id="VBk-HD-ojg"/>
+                                                <constraint firstAttribute="trailing" secondItem="f7t-mh-3f9" secondAttribute="trailing" constant="16" id="Vge-eQ-VrB"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yZi-Eb-Srm" secondAttribute="trailing" constant="8" id="ZfH-uE-LE0"/>
+                                                <constraint firstItem="yZi-Eb-Srm" firstAttribute="top" secondItem="bg1-HL-ff9" secondAttribute="topMargin" id="lcy-46-6Dj"/>
+                                                <constraint firstAttribute="bottom" secondItem="f7t-mh-3f9" secondAttribute="bottom" constant="2" id="tsn-Le-A2F"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="receivedMessageCell"/>
+                                        <connections>
+                                            <outlet property="emojiSymbols" destination="yZi-Eb-Srm" id="nqY-nO-10q"/>
+                                            <outlet property="timestampLabel" destination="f7t-mh-3f9" id="E2A-Zz-ljm"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

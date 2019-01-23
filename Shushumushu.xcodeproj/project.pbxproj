@@ -18,6 +18,7 @@
 		43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475ACF21E69EB3006F5B8C /* ChatViewController.swift */; };
 		434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C421F8F0050002FA5C /* String+Emoji.swift */; };
 		434772CA21F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */; };
+		434772CC21F907240002FA5C /* SentEmojiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772CB21F907240002FA5C /* SentEmojiTableViewCell.swift */; };
 		439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */; };
 		43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */; };
@@ -40,6 +41,7 @@
 		43475ACF21E69EB3006F5B8C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		434772C421F8F0050002FA5C /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedEmojiTableViewCell.swift; sourceTree = "<group>"; };
+		434772CB21F907240002FA5C /* SentEmojiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmojiTableViewCell.swift; sourceTree = "<group>"; };
 		439843552198D0CB00018215 /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageTableViewCell.swift; sourceTree = "<group>"; };
 		43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */,
 				43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */,
 				434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */,
+				434772CB21F907240002FA5C /* SentEmojiTableViewCell.swift */,
 			);
 			path = ChatCells;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */,
 				43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */,
 				4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */,
+				434772CC21F907240002FA5C /* SentEmojiTableViewCell.swift in Sources */,
 				434772CA21F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift in Sources */,
 				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,
 				434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */,

@@ -208,6 +208,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.timestampLabel.text = message.timestamp.toString()
             cell.profilePicture.image = chatPartnerProfilePicture
             return cell
+        } else if  message.sender == PeerService.peerService.myPeerId && message.text.containsOnlyEmoji {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentEmojiTableViewCell", for: indexPath) as? SentEmojiTableViewCell else {
+                fatalError("The dequeued cell is not an instance of ReceivedEmojiTableViewCell")
+            }
+            
+            cell.emojiSymbols.text = message.text
+            cell.timestampLabel.text = message.timestamp.toString()
+            return cell
         } else if message.sender == PeerService.peerService.myPeerId {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {
                 fatalError("The dequeued cell is not an instance of SentMessageTableViewCell")
