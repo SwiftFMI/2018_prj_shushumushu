@@ -16,6 +16,8 @@
 		4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4310EDF6219B259000622428 /* NameEditorTableViewController.swift */; };
 		43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475AC921E3CDD3006F5B8C /* Message.swift */; };
 		43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475ACF21E69EB3006F5B8C /* ChatViewController.swift */; };
+		434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C421F8F0050002FA5C /* String+Emoji.swift */; };
+		434772CA21F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */; };
 		439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */; };
 		43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */; };
@@ -36,6 +38,8 @@
 		4310EDF6219B259000622428 /* NameEditorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEditorTableViewController.swift; sourceTree = "<group>"; };
 		43475AC921E3CDD3006F5B8C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		43475ACF21E69EB3006F5B8C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		434772C421F8F0050002FA5C /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
+		434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedEmojiTableViewCell.swift; sourceTree = "<group>"; };
 		439843552198D0CB00018215 /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageTableViewCell.swift; sourceTree = "<group>"; };
 		43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -79,8 +83,9 @@
 				4308E61F219894A100B69050 /* AppDelegate.swift */,
 				4308E623219894A100B69050 /* Main.storyboard */,
 				4308E628219894A200B69050 /* LaunchScreen.storyboard */,
-				43475ACC21E3CE9F006F5B8C /* Chat */,
 				4310EDF4219B1E0700622428 /* ViewControllers */,
+				43475ACC21E3CE9F006F5B8C /* Chat */,
+				434772C321F8EF4F0002FA5C /* Extensions */,
 				4310EDF3219B1DD500622428 /* PeerService */,
 				4310EDF5219B1E4000622428 /* CustomViews */,
 			);
@@ -102,8 +107,6 @@
 				E5C6EFC521F095D50028662F /* SetupViewController.swift */,
 				439843552198D0CB00018215 /* PeerTableViewController.swift */,
 				4308E6372198CF7600B69050 /* PeerTableViewCell.swift */,
-				43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */,
-				43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */,
 				4310EDF9219B25E600622428 /* Settings */,
 			);
 			path = ViewControllers;
@@ -129,9 +132,28 @@
 		43475ACC21E3CE9F006F5B8C /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				434772C621F8F3170002FA5C /* ChatCells */,
 				43475AC921E3CDD3006F5B8C /* Message.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		434772C321F8EF4F0002FA5C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				434772C421F8F0050002FA5C /* String+Emoji.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		434772C621F8F3170002FA5C /* ChatCells */ = {
+			isa = PBXGroup;
+			children = (
+				43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */,
+				43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */,
+				434772C921F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift */,
+			);
+			path = ChatCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +231,9 @@
 				4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */,
 				43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */,
 				4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */,
+				434772CA21F8F3EC0002FA5C /* ReceivedEmojiTableViewCell.swift in Sources */,
 				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,
+				434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */,
 				43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */,
 				4308E620219894A100B69050 /* AppDelegate.swift in Sources */,
 				43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */,

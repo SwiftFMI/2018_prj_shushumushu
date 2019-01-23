@@ -197,22 +197,33 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if PeerService.peerService.messages[indexPath.row].sender == chatPartner {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageTableViewCell", for: indexPath) as? ReceivedMessageTableViewCell else {
-                  fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
+        let message = PeerService.peerService.messages[indexPath.row]
+        
+        if message.sender == chatPartner && message.text.containsOnlyEmoji {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedEmojiTableViewCell", for: indexPath) as? ReceivedEmojiTableViewCell else {
+                fatalError("The dequeued cell is not an instance of ReceivedEmojiTableViewCell")
             }
             
-            cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
-            cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
+            cell.emojiSymbols.text = message.text
+            cell.timestampLabel.text = message.timestamp.toString()
             cell.profilePicture.image = chatPartnerProfilePicture
             return cell
-        } else {
+        } else if message.sender == PeerService.peerService.myPeerId {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {
                 fatalError("The dequeued cell is not an instance of SentMessageTableViewCell")
             }
             
-            cell.messageText.text = PeerService.peerService.messages[indexPath.row].text
-            cell.timestampLabel.text = PeerService.peerService.messages[indexPath.row].timestamp.toString()
+            cell.messageText.text = message.text
+            cell.timestampLabel.text = message.timestamp.toString()
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageTableViewCell", for: indexPath) as? ReceivedMessageTableViewCell else {
+                fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
+            }
+            
+            cell.messageText.text = message.text
+            cell.timestampLabel.text = message.timestamp.toString()
+            cell.profilePicture.image = chatPartnerProfilePicture
             return cell
         }
     }

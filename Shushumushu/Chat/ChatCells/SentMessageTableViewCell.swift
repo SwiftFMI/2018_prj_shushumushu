@@ -16,7 +16,7 @@ class SentMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        roundedView.roundedCorners = 10 * CGFloat(integerLiteral: messageText.calculateMaxLines())
+        roundedView.roundedCorners = 12 * CGFloat(integerLiteral: messageText.calculateMaxLines())
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
