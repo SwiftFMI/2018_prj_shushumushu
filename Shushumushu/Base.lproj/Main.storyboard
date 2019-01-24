@@ -205,22 +205,22 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT7-Vp-Q5L" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
-                                                    <rect key="frame" x="49" y="17" width="56" height="40"/>
+                                                    <rect key="frame" x="49" y="17" width="64" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blf-F8-DHP">
-                                                            <rect key="frame" x="6" y="4" width="44" height="32"/>
+                                                            <rect key="frame" x="10" y="7" width="44" height="26"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.41051112540000001" green="0.66779549530000004" blue="0.93997858499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.87209181339999997" green="0.87209181339999997" blue="0.87209181339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="Blf-F8-DHP" secondAttribute="bottom" constant="4" id="JSo-wf-9A8"/>
-                                                        <constraint firstItem="Blf-F8-DHP" firstAttribute="top" secondItem="pT7-Vp-Q5L" secondAttribute="top" constant="4" id="YHk-cn-J7H"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Blf-F8-DHP" secondAttribute="trailing" constant="6" id="dTU-n6-K3U"/>
-                                                        <constraint firstItem="Blf-F8-DHP" firstAttribute="leading" secondItem="pT7-Vp-Q5L" secondAttribute="leading" constant="6" id="dqK-Vl-TGf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Blf-F8-DHP" secondAttribute="bottom" constant="7" id="JSo-wf-9A8"/>
+                                                        <constraint firstItem="Blf-F8-DHP" firstAttribute="top" secondItem="pT7-Vp-Q5L" secondAttribute="top" constant="7" id="YHk-cn-J7H"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Blf-F8-DHP" secondAttribute="trailing" constant="10" id="dTU-n6-K3U"/>
+                                                        <constraint firstItem="Blf-F8-DHP" firstAttribute="leading" secondItem="pT7-Vp-Q5L" secondAttribute="leading" constant="10" id="dqK-Vl-TGf"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
@@ -272,22 +272,22 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7i-uz-cMI" customClass="RoundedView" customModule="Shushumushu" customModuleProvider="target">
-                                                    <rect key="frame" x="296" y="11" width="56" height="50"/>
+                                                    <rect key="frame" x="288" y="11" width="64" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbW-qW-1rX">
-                                                            <rect key="frame" x="6" y="4" width="44" height="42"/>
+                                                            <rect key="frame" x="10" y="7" width="44" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.872091813438435" green="0.872091813438435" blue="0.872091813438435" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.51764705882352935" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="IbW-qW-1rX" firstAttribute="top" secondItem="f7i-uz-cMI" secondAttribute="top" constant="4" id="Hp0-cH-rga"/>
-                                                        <constraint firstItem="IbW-qW-1rX" firstAttribute="leading" secondItem="f7i-uz-cMI" secondAttribute="leading" constant="6" id="Iqn-D5-YZb"/>
-                                                        <constraint firstAttribute="trailing" secondItem="IbW-qW-1rX" secondAttribute="trailing" constant="6" id="Mx8-xY-LRJ"/>
-                                                        <constraint firstAttribute="bottom" secondItem="IbW-qW-1rX" secondAttribute="bottom" constant="4" id="uhm-Mu-6jr"/>
+                                                        <constraint firstItem="IbW-qW-1rX" firstAttribute="top" secondItem="f7i-uz-cMI" secondAttribute="top" constant="7" id="Hp0-cH-rga"/>
+                                                        <constraint firstItem="IbW-qW-1rX" firstAttribute="leading" secondItem="f7i-uz-cMI" secondAttribute="leading" constant="10" id="Iqn-D5-YZb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IbW-qW-1rX" secondAttribute="trailing" constant="10" id="Mx8-xY-LRJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="IbW-qW-1rX" secondAttribute="bottom" constant="7" id="uhm-Mu-6jr"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
