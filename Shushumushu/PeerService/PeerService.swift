@@ -128,7 +128,7 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         print("Lost peer with id: \(peerID)")
         
-        var atIndex: Int!
+        var atIndex: Int?
         
         for (index, peer) in foundPeers.enumerated() {
             if peer == peerID {
@@ -138,8 +138,11 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
             }
         }
         
-        profilePictures.remove(at: atIndex)
-        delegate?.lostPeer(at: atIndex)
+        if let ind = atIndex {
+            profilePictures.remove(at: ind)
+        }
+        
+        delegate?.lostPeer(at: atIndex!)
         
     }
     

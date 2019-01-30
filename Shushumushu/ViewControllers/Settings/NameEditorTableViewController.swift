@@ -38,11 +38,17 @@ class NameEditorTableViewController: UITableViewController {
 
     @objc func rightBarButtonTapped(_ sender: UIBarButtonItem!) {
         if let text = nameTextField.text {
-            PeerService.peerService = PeerService(text)
+            if text != "" {
+                PeerService.peerService = PeerService(text)
+                delegate?.NameEditorTableViewControllerDelegateDidUpdatePeerService(self)
+                navigationController?.popViewController(animated: true)
+            } else {
+                let noPictureAlert = UIAlertController(title: "Oops", message: "You can't leave the name field empty", preferredStyle: .alert)
+                noPictureAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(noPictureAlert, animated: true)
+            }
         }
         
-        delegate?.NameEditorTableViewControllerDelegateDidUpdatePeerService(self)
-        navigationController?.popViewController(animated: true)
     }
     
 

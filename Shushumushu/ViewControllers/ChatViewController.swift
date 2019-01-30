@@ -169,6 +169,17 @@ class ChatViewController: UIViewController {
         }, completion:  nil)
     }
     
+    func hideUnreadMessagesView() {
+        unreadMessagesCount = 0
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.unreadMessagesView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            self.unreadMessagesView.isHidden = true
+        }) { _ in
+            self.unreadMessagesView.transform = .identity
+        }
+        
+    }
+    
     @objc func handleKeyboardNotification(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -207,8 +218,7 @@ class ChatViewController: UIViewController {
     
     ///Scrolls ChatTableView to the bottom
     func scrollToBottom(_ animated: Bool) {
-        unreadMessagesCount = 0
-        unreadMessagesView.isHidden = true
+        hideUnreadMessagesView()
         DispatchQueue.main.async{
             if self.chatTableView.numberOfRows(inSection: 0) > 0 {
                 self.chatTableView.scrollToRow(at: IndexPath(row: self.chatTableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: animated)
@@ -319,6 +329,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return numberOfMessages
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+            hideUnreadMessagesView()
+        }
     }
     
 }
