@@ -184,6 +184,10 @@ class ChatViewController: UIViewController {
     
     func showUnreadMessagesView() {
         if unreadMessagesCount == 0 { return }
+        
+        let vibration = UINotificationFeedbackGenerator()
+        vibration.notificationOccurred(.success)
+        
         self.unreadMessagesView.isHidden = false
         self.unreadMessagesView.setTitle("\(self.unreadMessagesCount)", for: .normal)
         self.animateUnreadMessagesView()
@@ -252,6 +256,9 @@ class ChatViewController: UIViewController {
     
     @objc func sendButtonTapped(_ sender: Any) {
         guard let messageReceiver = chatPartner else { return }
+        
+        let vibration = UIImpactFeedbackGenerator(style: .medium)
+        vibration.impactOccurred()
         
         if inputTextField.text == "" { inputTextField.text = "👍" }
         
