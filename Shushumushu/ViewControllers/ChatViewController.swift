@@ -56,7 +56,7 @@ class ChatViewController: UIViewController {
         sendButton.setTitle("👍", for: .normal)
         let titleColor = UIColor.blue
         sendButton.setTitleColor(titleColor, for: .normal)
-        sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         return sendButton
     }()
@@ -137,11 +137,13 @@ class ChatViewController: UIViewController {
         if textfield.text != "" {
             UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
                 self.sendButton.setTitle("Send", for: .normal)
+                self.sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
             }, completion: nil)
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 UIView.transition(with: self.sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
                     self.sendButton.setTitle("👍", for: .normal)
+                    self.sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
                 }, completion: nil)
             }
         }
@@ -154,9 +156,7 @@ class ChatViewController: UIViewController {
             if self.previousMessageIsAtBottom() {
                 self.scrollToBottom(true)
             } else {
-                self.unreadMessagesView.isHidden = false
-                self.unreadMessagesView.setTitle("\(self.unreadMessagesCount)", for: .normal)
-                self.animateUnreadMessagesView()
+                self.showUnreadMessagesView()
             }
         }
     }
@@ -178,6 +178,13 @@ class ChatViewController: UIViewController {
             self.unreadMessagesView.transform = .identity
         }
         
+    }
+    
+    func showUnreadMessagesView() {
+        if unreadMessagesCount == 0 { return }
+        self.unreadMessagesView.isHidden = false
+        self.unreadMessagesView.setTitle("\(self.unreadMessagesCount)", for: .normal)
+        self.animateUnreadMessagesView()
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
@@ -261,6 +268,7 @@ class ChatViewController: UIViewController {
         inputTextField.text = ""
         UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
             self.sendButton.setTitle("👍", for: .normal)
+            self.sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         }, completion: nil)
         scrollToBottom(true)
     }
