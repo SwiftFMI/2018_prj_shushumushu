@@ -48,6 +48,8 @@ class ChatViewController: UIViewController {
     let inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message..."
+        textField.returnKeyType = .go
+        textField.addTarget(self, action: #selector(sendButtonTapped), for: .primaryActionTriggered)
         return textField
     }()
     
