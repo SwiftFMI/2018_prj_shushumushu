@@ -13,17 +13,30 @@ class ChatViewController: UIViewController {
     var chatPartner: MCPeerID?
     var chatPartnerProfilePicture: UIImage?
     var messageInputContainerBottomConstraint: NSLayoutConstraint?
-    var separatorBottomConstraint: NSLayoutConstraint?
+    var unreadMessagesCount: Int
     
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var chatTableView: UITableView!
     
     required init?(coder aDecoder: NSCoder) {
         chatPartner = nil
-        messageInputContainerBottomConstraint = nil
-        separatorBottomConstraint = nil
+        unreadMessagesCount = 0
         super.init(coder: aDecoder)
     }
+    
+    let unreadMessagesView: UIButton = {
+        let unreadMessagesView = UIButton()
+        unreadMessagesView.backgroundColor = UIColor.init(red: 1, green: 0.23, blue: 0.19, alpha: 1)
+        unreadMessagesView.layer.borderColor = UIColor.black.cgColor
+        unreadMessagesView.layer.borderWidth = 1.0
+        unreadMessagesView.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+        unreadMessagesView.setTitle("0", for: .normal)
+        unreadMessagesView.layer.cornerRadius = 25
+        unreadMessagesView.layer.masksToBounds = true
+        unreadMessagesView.isHidden = true
+        unreadMessagesView.addTarget(self, action: #selector(unreadMessagesViewTapped), for: .touchUpInside)
+        return unreadMessagesView
+    }()
     
     let messageInputContainerView: UIView = {
         let messageInputContainerView = UIView()
@@ -80,21 +93,37 @@ class ChatViewController: UIViewController {
     }
     
     func setupAditionalViews() {
+        var separatorBottomConstraint: NSLayoutConstraint?
+        var unreadMessagesBottomConstraint: NSLayoutConstraint?
+        var unreadMessagesCenterConstraint: NSLayoutConstraint?
+        
         messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         separator.translatesAutoresizingMaskIntoConstraints = false
+        unreadMessagesView.translatesAutoresizingMaskIntoConstraints = false
         
-        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton, "separator": separator]
+        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton, "separator": separator, "unreadMessagesView": unreadMessagesView]
         view.addSubview(messageInputContainerView)
         view.addSubview(separator)
+        view.addSubview(unreadMessagesView)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[separator]|", options: [], metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[messageInputContainerView]|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[separator(1)]-[messageInputContainerView(48)]-0-[view]", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[unreadMessagesView]-[separator(1)]-[messageInputContainerView(48)]-0-[view]", options: [], metrics: nil, views: views))
         messageInputContainerBottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         separatorBottomConstraint = NSLayoutConstraint(item: separator, attribute: .bottom, relatedBy: .equal, toItem: messageInputContainerView, attribute: .top, multiplier: 1, constant: 0)
+        unreadMessagesBottomConstraint = NSLayoutConstraint(item: unreadMessagesView, attribute: .bottom, relatedBy: .equal, toItem: separator, attribute: .top, multiplier: 1, constant: -8)
+        unreadMessagesCenterConstraint = NSLayoutConstraint(item: unreadMessagesView, attribute: .centerX, relatedBy: .equal, toItem: separator, attribute: .centerX, multiplier: 1, constant: 0)
         view.addConstraint(messageInputContainerBottomConstraint!)
         view.addConstraint(separatorBottomConstraint!)
+        view.addConstraint(unreadMessagesBottomConstraint!)
+        view.addConstraint(unreadMessagesCenterConstraint!)
+        
+        let unreadMessagesHeightConstraint = NSLayoutConstraint(item: unreadMessagesView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+        let unreadMessagesWidthConstant = NSLayoutConstraint(item: unreadMessagesView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+        view.addConstraints([unreadMessagesWidthConstant, unreadMessagesHeightConstraint])
+        
+       
         
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
@@ -118,10 +147,14 @@ class ChatViewController: UIViewController {
     }
     
     @objc func messageReceivedAction(_ notification: Notification) {
+        unreadMessagesCount = unreadMessagesCount + 1
         DispatchQueue.main.async {
             self.chatTableView.insertRows(at: [IndexPath(row: self.numberOfMessages(fromAndTo: self.chatPartner!) - 1, section: 0)], with: .automatic)
             if self.previousMessageIsAtBottom() {
                 self.scrollToBottom(true)
+            } else {
+                self.unreadMessagesView.titleLabel?.text = String("\(self.unreadMessagesCount)")
+                self.unreadMessagesView.isHidden = false
             }
         }
     }
@@ -164,6 +197,8 @@ class ChatViewController: UIViewController {
     
     ///Scrolls ChatTableView to the bottom
     func scrollToBottom(_ animated: Bool) {
+        unreadMessagesCount = 0
+        unreadMessagesView.isHidden = true
         DispatchQueue.main.async{
             if self.chatTableView.numberOfRows(inSection: 0) > 0 {
                 self.chatTableView.scrollToRow(at: IndexPath(row: self.chatTableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: animated)
@@ -207,6 +242,10 @@ class ChatViewController: UIViewController {
         UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
             self.sendButton.setTitle("👍", for: .normal)
         }, completion: nil)
+        scrollToBottom(true)
+    }
+    
+    @objc func unreadMessagesViewTapped(_ sender: Any) {
         scrollToBottom(true)
     }
 }
