@@ -31,6 +31,7 @@ class ChatViewController: UIViewController {
         unreadMessagesView.layer.borderWidth = 1.0
         unreadMessagesView.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         unreadMessagesView.setTitle("0", for: .normal)
+        unreadMessagesView.titleLabel?.textAlignment = NSTextAlignment.center
         unreadMessagesView.layer.cornerRadius = 25
         unreadMessagesView.layer.masksToBounds = true
         unreadMessagesView.isHidden = true
@@ -153,10 +154,19 @@ class ChatViewController: UIViewController {
             if self.previousMessageIsAtBottom() {
                 self.scrollToBottom(true)
             } else {
-                self.unreadMessagesView.titleLabel?.text = String("\(self.unreadMessagesCount)")
                 self.unreadMessagesView.isHidden = false
+                self.unreadMessagesView.setTitle("\(self.unreadMessagesCount)", for: .normal)
+                self.animateUnreadMessagesView()
             }
         }
+    }
+    
+    func animateUnreadMessagesView() {
+        unreadMessagesView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        
+        UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 3.0, options: .allowUserInteraction, animations: {
+            self.unreadMessagesView.transform = .identity
+        }, completion:  nil)
     }
     
     @objc func handleKeyboardNotification(notification: NSNotification) {
