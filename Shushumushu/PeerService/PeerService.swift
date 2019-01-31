@@ -9,6 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
+struct Peer {
+    var id: MCPeerID;
+    var profilePicture: UIImage;
+}
+
 protocol PeerServiceDelegate: class {
     func foundPeer()
     func lostPeer(at index: Int)
@@ -21,28 +26,22 @@ class PeerService: NSObject {
     private let PeerServiceType = "ssms-mpc"
     
     var session : MCSession!
-    var myPeerId : MCPeerID!
+    let myPeerId = MCPeerID.reusableInstance(withDisplayName: UserDefaults.standard.string(forKey: "username")!);
     var serviceAdvertiser : MCNearbyServiceAdvertiser!
     var serviceBrowser : MCNearbyServiceBrowser!
-    var currentTimestamp: TimeInterval
    
-    var foundPeers = [MCPeerID]()
+    var foundPeers: [Peer] = [];
     var messages = [Message]()
-    var profilePictures = [UIImage]()
     
     weak var delegate: PeerServiceDelegate?
     
     override init() {
-        currentTimestamp = Date().timeIntervalSince1970
-        
         super.init()
-        
-        myPeerId = MCPeerID(displayName: UserDefaults.standard.string(forKey: "username")!)
     
         session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["timestamp" : String(currentTimestamp)], serviceType: PeerServiceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
         serviceAdvertiser.delegate = self
 
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
@@ -51,22 +50,19 @@ class PeerService: NSObject {
         serviceAdvertiser.startAdvertisingPeer()
         serviceBrowser.startBrowsingForPeers()
     }
-
-    init(_ displayName: String) {
-        currentTimestamp = Date().timeIntervalSince1970
-        super.init()
-        myPeerId = MCPeerID(displayName: displayName)
+    
+    func handlePeerInvitation(peer: Peer) -> Void {
+        for (index, foundPeer) in foundPeers.enumerated() {
+            if (peer.id == foundPeer.id) {
+                if (peer.profilePicture != foundPeer.profilePicture) {
+                    foundPeers[index].profilePicture = peer.profilePicture
+                }
+                return
+            }
+        }
         
-        session = MCSession(peer: myPeerId)
-        session.delegate = self
-        
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
-        serviceBrowser.delegate = self
-        serviceBrowser.startBrowsingForPeers()
-
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["timestamp" : String(currentTimestamp)], serviceType: PeerServiceType)
-        serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
+        self.foundPeers.append(peer)
+        delegate?.foundPeer()
     }
     
     deinit {
@@ -74,38 +70,81 @@ class PeerService: NSObject {
         serviceBrowser.stopBrowsingForPeers()
     }
     
-    func sendProfilePicture(to peerID: MCPeerID) {
-        let profilePictureData = UserDefaults.standard.data(forKey: "profilePic")!
-        serviceBrowser.invitePeer(peerID, to: session, withContext: profilePictureData, timeout: 10)
+}
+
+// MARK: - Advertiser Delegate
+extension PeerService: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        print("Received invitation from peer \(peerID)")
+        if let contextData = context {
+            if let profilePicture = UIImage(data: contextData) {
+                print("Received profile picture from peer \(peerID)")
+                self.handlePeerInvitation(peer: Peer(id: peerID, profilePicture: profilePicture))
+                invitationHandler(true, self.session)
+                return
+            }
+        }
+        
+        invitationHandler(false, self.session)
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        print(error.localizedDescription)
     }
     
 }
 
-extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+// MARK: - Browser Delegate
+extension PeerService: MCNearbyServiceBrowserDelegate {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        print("Found peer with id: \(peerID)")
+//        let profilePic = UIImage(named: "default-profile-pic")
+        let profilePictureData = UserDefaults.standard.data(forKey: "profilePic")!
+
+        browser.invitePeer(peerID, to: self.session, withContext: profilePictureData, timeout: 10)
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        print("Lost peer with id: \(peerID)")
+        
+        var atIndex: Int?
+        
+        for (index, peer) in foundPeers.enumerated() {
+            if (peer.id == peerID) {
+                foundPeers.remove(at: index)
+                atIndex = index
+                delegate?.lostPeer(at: atIndex!)
+                break
+            }
+        }
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
+// MARK: - Session Delegate
+extension PeerService: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
-        case .connected:
-            print("Connected: \(peerID.displayName)")
-        case .connecting:
-            print("Connecting: \(peerID.displayName)")
-        case .notConnected:
-            print("Not connected: \(peerID.displayName)")
+            case .connected:
+                print("Connected: \(peerID.displayName)")
+            case .connecting:
+                print("Connecting: \(peerID.displayName)")
+            case .notConnected:
+                print("Not connected: \(peerID.displayName)")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("Received data from: \(peerID)")
-    
-        if let receivedProfilePic = UIImage(data: data){
-            profilePictures.append(receivedProfilePic)
-        }
-        else {
-            let receivedMessage = String(decoding: data, as: UTF8.self)
-            let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
-            messages.append(newMessage)
-            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
-            print(receivedMessage)
-        }
+        print("Received data: \(data) from: \(peerID)")
+        
+        let receivedMessage = String(decoding: data, as: UTF8.self)
+        let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
+        messages.append(newMessage)
+        NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
+        print(receivedMessage)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -118,59 +157,5 @@ extension PeerService:  MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNea
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finished receiving a resource from: \(peerID)")
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        print("Found peer with id: \(peerID)")
-        self.sendProfilePicture(to: peerID)
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        print("Lost peer with id: \(peerID)")
-        
-        var atIndex: Int?
-        
-        for (index, peer) in foundPeers.enumerated() {
-            if peer == peerID {
-                foundPeers.remove(at: index)
-                atIndex = index
-                break
-            }
-        }
-        
-        if let ind = atIndex {
-            profilePictures.remove(at: ind)
-        }
-        
-        delegate?.lostPeer(at: atIndex!)
-        
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
-        print(error.localizedDescription)
-    }
-
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        let timeInterval: Double = context!.withUnsafeBytes { $0.pointee }
-        let date = Date(timeIntervalSince1970: timeInterval)
-        
-        if let contextData = context {
-            if let profilePicture = UIImage(data: contextData) {
-                print("Received profile picture from peer \(peerID) with timestamp \(date)")
-                profilePictures.append(profilePicture)
-                foundPeers.append(peerID)
-                delegate?.foundPeer()
-                invitationHandler(false, session)
-                return
-            }
-        }
-        
-        
-        invitationHandler(true, session)
-        print("Received invitation from peer \(peerID) with timestamp \(date)")
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
-        print(error.localizedDescription)
     }
 }

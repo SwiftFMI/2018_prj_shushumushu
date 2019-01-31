@@ -80,8 +80,8 @@ class ChatViewController: UIViewController {
     func getProfilePicture(_ peerID: MCPeerID) -> UIImage? {
         var profilePicture: UIImage?
         for (index, peer) in PeerService.peerService.foundPeers.enumerated() {
-            if peer == chatPartner {
-                profilePicture = PeerService.peerService.profilePictures[index]
+            if peer.id == chatPartner {
+                profilePicture = PeerService.peerService.foundPeers[index].profilePicture
                 break
             }
         }

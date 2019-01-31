@@ -39,7 +39,6 @@ class NameEditorTableViewController: UITableViewController {
     @objc func rightBarButtonTapped(_ sender: UIBarButtonItem!) {
         if let text = nameTextField.text {
             if text != "" {
-                PeerService.peerService = PeerService(text)
                 delegate?.NameEditorTableViewControllerDelegateDidUpdatePeerService(self)
                 navigationController?.popViewController(animated: true)
             } else {

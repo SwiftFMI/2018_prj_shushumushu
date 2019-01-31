@@ -39,7 +39,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PeerService.peerService.profilePictures.count
+        return PeerService.peerService.foundPeers.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,16 +47,16 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
         }
         
-        let peer: MCPeerID = PeerService.peerService.foundPeers[indexPath.row]
-        cell.peerName.text = peer.displayName
-        cell.profilePicture.image = PeerService.peerService.profilePictures[indexPath.row]
+        let peer: Peer = PeerService.peerService.foundPeers[indexPath.row]
+        cell.peerName.text = peer.id.displayName
+        cell.profilePicture.image = peer.profilePicture
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var nowInterval = Date().timeIntervalSince1970
         let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
-        let selectedPeer = PeerService.peerService.foundPeers[indexPath.row]
+        let selectedPeer = PeerService.peerService.foundPeers[indexPath.row].id
         
         PeerService.peerService.serviceBrowser.invitePeer(selectedPeer, to: PeerService.peerService.session, withContext: timestampData, timeout: 30)
         performSegue(withIdentifier: "ChatViewController", sender: selectedPeer)

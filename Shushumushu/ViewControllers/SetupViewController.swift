@@ -18,6 +18,7 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
         super.viewDidLoad()
         pickedImage.layer.cornerRadius = pickedImage.frame.size.width / 2
         pickedImage.layer.masksToBounds = true
+        username.text = UserDefaults.standard.string(forKey: "username")
     }
     
     
