@@ -13,12 +13,30 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
     
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (UserDefaults.standard.data(forKey: "profilePic") != nil && UserDefaults.standard.string(forKey: "username") != nil) {
+            let activity = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x - 50, y: self.view.center.y - 50, width: 100, height: 100))
+            activity.startAnimating()
+            activity.style = .gray
+            self.view.addSubview(activity)
+            blurView.isHidden = false
+            navigationController?.setNavigationBarHidden(true, animated: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [unowned self] in
+                self.performSegue(withIdentifier: "NearbyDevices", sender: self)
+                activity.removeFromSuperview()
+                self.blurView.isHidden = true
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
+            }
+        }
+        
         pickedImage.layer.cornerRadius = pickedImage.frame.size.width / 2
         pickedImage.layer.masksToBounds = true
         username.text = UserDefaults.standard.string(forKey: "username")
+        pickedImage.image = UIImage(data: UserDefaults.standard.data(forKey: "profilePic")!)
     }
     
     

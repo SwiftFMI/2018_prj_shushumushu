@@ -74,6 +74,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXV-xz-h2C">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9tQ-7H-Z9l">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -82,13 +90,17 @@
                             <constraint firstItem="RdJ-RL-kg2" firstAttribute="top" secondItem="yKj-Yw-e3x" secondAttribute="bottom" constant="24" id="4Cx-bU-2w5"/>
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yEd-ZR-9x1" secondAttribute="trailing" constant="60" id="6Um-lY-YT3"/>
                             <constraint firstItem="RdJ-RL-kg2" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="7Ou-4M-1I5"/>
+                            <constraint firstItem="iXV-xz-h2C" firstAttribute="trailing" secondItem="E1l-Zm-dcA" secondAttribute="trailing" id="8Jd-e5-2mn"/>
                             <constraint firstItem="yKj-Yw-e3x" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="J8O-zr-sdR"/>
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="bottom" secondItem="yEd-ZR-9x1" secondAttribute="bottom" constant="42" id="Qee-2P-kCF"/>
                             <constraint firstItem="nsQ-fP-xzo" firstAttribute="top" secondItem="4AU-1r-hhO" secondAttribute="top" constant="32" id="Xyy-Rx-u6n"/>
+                            <constraint firstItem="iXV-xz-h2C" firstAttribute="leading" secondItem="E1l-Zm-dcA" secondAttribute="leading" id="bVY-c1-34P"/>
                             <constraint firstItem="yEd-ZR-9x1" firstAttribute="top" secondItem="RdJ-RL-kg2" secondAttribute="bottom" constant="24" id="bcx-qO-Tt3"/>
+                            <constraint firstItem="iXV-xz-h2C" firstAttribute="bottom" secondItem="E1l-Zm-dcA" secondAttribute="bottom" id="dql-NB-7ww"/>
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yKj-Yw-e3x" secondAttribute="trailing" constant="55" id="gaW-f2-7jt"/>
                             <constraint firstItem="yKj-Yw-e3x" firstAttribute="leading" secondItem="4AU-1r-hhO" secondAttribute="leading" constant="55" id="iaB-nW-qeZ"/>
                             <constraint firstItem="nsQ-fP-xzo" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="uiz-u2-aD5"/>
+                            <constraint firstItem="iXV-xz-h2C" firstAttribute="top" secondItem="E1l-Zm-dcA" secondAttribute="top" id="xFb-7C-K90"/>
                             <constraint firstItem="yKj-Yw-e3x" firstAttribute="top" secondItem="nsQ-fP-xzo" secondAttribute="bottom" constant="24" id="yo2-XT-yr8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4AU-1r-hhO"/>
@@ -104,6 +116,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="blurView" destination="iXV-xz-h2C" id="CM8-Do-9JZ"/>
                         <outlet property="pickedImage" destination="RdJ-RL-kg2" id="fdc-td-Esy"/>
                         <outlet property="username" destination="yKj-Yw-e3x" id="vck-b4-TER"/>
                         <segue destination="yu7-ma-RAD" kind="show" identifier="NearbyDevices" id="zm7-Tc-evs"/>
@@ -116,7 +129,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="135" y="107"/>
+            <point key="canvasLocation" x="133.59999999999999" y="106.59670164917542"/>
         </scene>
         <!--Nearby devices-->
         <scene sceneID="5OX-WW-SpQ">
@@ -599,7 +612,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="C62-Vz-o6d" kind="relationship" relationship="rootViewController" id="nY3-Ji-Obf"/>
+                        <segue destination="C62-Vz-o6d" kind="relationship" relationship="rootViewController" id="aIS-ov-qgi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i1f-wG-RQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
