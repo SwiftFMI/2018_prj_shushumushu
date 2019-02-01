@@ -26,17 +26,17 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
             blurView.isHidden = false
             navigationController?.setNavigationBarHidden(true, animated: false)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [unowned self] in
-                self.performSegue(withIdentifier: "NearbyDevices", sender: self)
                 activity.removeFromSuperview()
                 self.blurView.isHidden = true
                 self.navigationController?.setNavigationBarHidden(false, animated: false)
+                self.performSegue(withIdentifier: "NearbyDevices", sender: self)
             }
+            username.text = UserDefaults.standard.string(forKey: "username")
+            pickedImage.image = UIImage(data: UserDefaults.standard.data(forKey: "profilePic")!)
         }
         
         pickedImage.layer.cornerRadius = pickedImage.frame.size.width / 2
         pickedImage.layer.masksToBounds = true
-        username.text = UserDefaults.standard.string(forKey: "username")
-        pickedImage.image = UIImage(data: UserDefaults.standard.data(forKey: "profilePic")!)
     }
     
     

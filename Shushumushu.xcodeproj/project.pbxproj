@@ -22,6 +22,7 @@
 		439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		43DBF64B21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */; };
 		43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */; };
+		43E964002204E82D002B16F5 /* MCPeerID+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E963FF2204E82D002B16F5 /* MCPeerID+Reusable.swift */; };
 		43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30821995D9B000BBCDD /* PeerService.swift */; };
 		43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */; };
 		E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C6EFC521F095D50028662F /* SetupViewController.swift */; };
@@ -45,6 +46,7 @@
 		439843552198D0CB00018215 /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		43DBF64A21ECDB3700E03AD8 /* ReceivedMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageTableViewCell.swift; sourceTree = "<group>"; };
 		43DBF64C21ECDB4700E03AD8 /* SentMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessageTableViewCell.swift; sourceTree = "<group>"; };
+		43E963FF2204E82D002B16F5 /* MCPeerID+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Reusable.swift"; sourceTree = "<group>"; };
 		43F7E30821995D9B000BBCDD /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
 		43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E5C6EFC521F095D50028662F /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		4310EDF3219B1DD500622428 /* PeerService */ = {
 			isa = PBXGroup;
 			children = (
+				43E963FF2204E82D002B16F5 /* MCPeerID+Reusable.swift */,
 				43F7E30821995D9B000BBCDD /* PeerService.swift */,
 			);
 			path = PeerService;
@@ -239,6 +242,7 @@
 				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,
 				434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */,
 				43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */,
+				43E964002204E82D002B16F5 /* MCPeerID+Reusable.swift in Sources */,
 				4308E620219894A100B69050 /* AppDelegate.swift in Sources */,
 				43DBF64D21ECDB4700E03AD8 /* SentMessageTableViewCell.swift in Sources */,
 				43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */,
