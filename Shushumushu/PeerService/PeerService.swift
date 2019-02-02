@@ -10,8 +10,8 @@ import Foundation
 import MultipeerConnectivity
 
 struct Peer {
-    var id: MCPeerID;
-    var profilePicture: UIImage;
+    var id: MCPeerID
+    var profilePicture: UIImage
 }
 
 protocol PeerServiceDelegate: class {
@@ -29,24 +29,24 @@ class PeerService: NSObject {
     let myPeerId = MCPeerID.reusableInstance(withDisplayName: UserDefaults.standard.string(forKey: "username")!);
     var serviceAdvertiser : MCNearbyServiceAdvertiser!
     var serviceBrowser : MCNearbyServiceBrowser!
-   
-    var foundPeers: [Peer] = [];
+    
+    var foundPeers: [Peer] = []
     var messages = [Message]()
     
     weak var delegate: PeerServiceDelegate?
     
     override init() {
         super.init()
-    
+        
         session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: PeerServiceType)
         serviceAdvertiser.delegate = self
-
+        
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: PeerServiceType)
         serviceBrowser.delegate = self
-
+        
         serviceAdvertiser.startAdvertisingPeer()
         serviceBrowser.startBrowsingForPeers()
     }
@@ -98,9 +98,9 @@ extension PeerService: MCNearbyServiceAdvertiserDelegate {
 extension PeerService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
-//        let profilePic = UIImage(named: "default-profile-pic")
+        //        let profilePic = UIImage(named: "default-profile-pic")
         let profilePictureData = UserDefaults.standard.data(forKey: "profilePic")!
-
+        
         browser.invitePeer(peerID, to: self.session, withContext: profilePictureData, timeout: 10)
     }
     
@@ -128,23 +128,27 @@ extension PeerService: MCNearbyServiceBrowserDelegate {
 extension PeerService: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
-            case .connected:
-                print("Connected: \(peerID.displayName)")
-            case .connecting:
-                print("Connecting: \(peerID.displayName)")
-            case .notConnected:
-                print("Not connected: \(peerID.displayName)")
+        case .connected:
+            print("Connected: \(peerID.displayName)")
+        case .connecting:
+            print("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            print("Not connected: \(peerID.displayName)")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Received data: \(data) from: \(peerID)")
-        
-        let receivedMessage = String(decoding: data, as: UTF8.self)
-        let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedMessage)
-        messages.append(newMessage)
-        NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
-        print(receivedMessage)
+        if let receivedImage = UIImage(data: data){
+            let newMessage = Message(sender: peerID, receiver: myPeerId, image: receivedImage)
+            messages.append(newMessage)
+            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
+        } else {
+            let receivedText = String(decoding: data, as: UTF8.self) 
+            let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedText)
+            messages.append(newMessage)
+            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

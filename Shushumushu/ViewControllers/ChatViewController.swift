@@ -26,6 +26,7 @@ class ChatViewController: UIViewController {
     
     let unreadMessagesView: UIButton = {
         let unreadMessagesView = UIButton()
+        unreadMessagesView.translatesAutoresizingMaskIntoConstraints = false
         unreadMessagesView.backgroundColor = UIColor.init(red: 1, green: 0.23, blue: 0.19, alpha: 1)
         unreadMessagesView.layer.borderColor = UIColor.black.cgColor
         unreadMessagesView.layer.borderWidth = 1.0
@@ -41,12 +42,14 @@ class ChatViewController: UIViewController {
     
     let messageInputContainerView: UIView = {
         let messageInputContainerView = UIView()
+        messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
         messageInputContainerView.backgroundColor = UIColor.init(white: 19/20, alpha: 1)
         return messageInputContainerView
     }()
     
     let inputTextField: UITextField = {
         let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter message..."
         textField.returnKeyType = .go
         textField.addTarget(self, action: #selector(sendButtonTapped), for: .primaryActionTriggered)
@@ -55,6 +58,7 @@ class ChatViewController: UIViewController {
     
     let sendButton: UIButton = {
         let sendButton = UIButton()
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.setTitle("👍", for: .normal)
         let titleColor = UIColor.blue
         sendButton.setTitleColor(titleColor, for: .normal)
@@ -65,8 +69,18 @@ class ChatViewController: UIViewController {
     
     let separator: UIView = {
         let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor = UIColor.init(white: 13/15, alpha: 1)
         return separator
+    }()
+    
+    let camera: UIButton = {
+        let camera = UIButton()
+        camera.translatesAutoresizingMaskIntoConstraints = false
+        camera.setTitle("", for: .normal)
+        camera.setBackgroundImage(UIImage(named: "CameraIcon"), for: .normal)
+        camera.addTarget(self, action: #selector(cameraButtonTapped), for: .touchUpInside)
+        return camera
     }()
     
     override func viewDidLoad() {
@@ -100,13 +114,7 @@ class ChatViewController: UIViewController {
         var unreadMessagesBottomConstraint: NSLayoutConstraint?
         var unreadMessagesCenterConstraint: NSLayoutConstraint?
         
-        messageInputContainerView.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        unreadMessagesView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton, "separator": separator, "unreadMessagesView": unreadMessagesView]
+        let views = ["view": view!, "messageInputContainerView": messageInputContainerView, "inputTextField": inputTextField, "sendButton": sendButton, "separator": separator, "unreadMessagesView": unreadMessagesView, "camera": camera]
         view.addSubview(messageInputContainerView)
         view.addSubview(separator)
         view.addSubview(unreadMessagesView)
@@ -126,13 +134,13 @@ class ChatViewController: UIViewController {
         let unreadMessagesWidthConstant = NSLayoutConstraint(item: unreadMessagesView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
         view.addConstraints([unreadMessagesWidthConstant, unreadMessagesHeightConstraint])
         
-       
-        
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
+        messageInputContainerView.addSubview(camera)
+        messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[camera]-8-|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[inputTextField]|", options: [], metrics: nil, views: views))
         messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[sendButton]|", options: [], metrics: nil, views: views))
-        messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[inputTextField][sendButton(60)]|", options: [], metrics: nil, views: views))
+        messageInputContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[camera(32)]-8-[inputTextField][sendButton(60)]|", options: [], metrics: nil, views: views))
     }
     
     @objc func textFieldDidChangeAction(_ textfield: UITextField) {
@@ -142,7 +150,7 @@ class ChatViewController: UIViewController {
                 self.sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
             }, completion: nil)
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 UIView.transition(with: self.sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: {
                     self.sendButton.setTitle("👍", for: .normal)
                     self.sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -212,6 +220,16 @@ class ChatViewController: UIViewController {
         }
     }
     
+    @objc func cameraButtonTapped() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
     ///Checks if the message before the last one is at the bottom
     func previousMessageIsAtBottom() -> Bool {
         var previousMessageIsAtBottom = false
@@ -225,7 +243,7 @@ class ChatViewController: UIViewController {
                 previousMessageIsAtBottom = true
             }
         }
-    
+        
         return previousMessageIsAtBottom
     }
     
@@ -255,7 +273,10 @@ class ChatViewController: UIViewController {
     }
     
     @objc func sendButtonTapped(_ sender: Any) {
-        guard let messageReceiver = chatPartner else { return }
+        guard let messageReceiver = chatPartner else {
+            print("No chat participant found")
+            return
+        }
         
         let vibration = UIImpactFeedbackGenerator(style: .medium)
         vibration.impactOccurred()
@@ -291,45 +312,71 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfMessages(fromAndTo: chatPartner!)
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = PeerService.peerService.messages[indexPath.row]
         
-        if message.sender == chatPartner && message.text.containsOnlyEmoji {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedEmojiTableViewCell", for: indexPath) as? ReceivedEmojiTableViewCell else {
-                fatalError("The dequeued cell is not an instance of ReceivedEmojiTableViewCell")
+        if message.sender == PeerService.peerService.myPeerId {
+            if message.messageType == .Text {
+                if message.text!.containsOnlyEmoji {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentEmojiTableViewCell", for: indexPath) as? SentEmojiTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of SentEmojiTableViewCell")
+                    }
+                    
+                    cell.emojiSymbols.text = message.text
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    return cell
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of SentMessageTableViewCell")
+                    }
+                    
+                    cell.messageText.text = message.text
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    return cell
+                }
+            } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentImageTableViewCell", for: indexPath) as? SentImageTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of SentImageTableViewCell")
+                    }
+    
+                    cell.sentImage.image = message.image
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    return cell
             }
-            
-            cell.emojiSymbols.text = message.text
-            cell.timestampLabel.text = message.timestamp.toString()
-            cell.profilePicture.image = chatPartnerProfilePicture
-            return cell
-        } else if  message.sender == PeerService.peerService.myPeerId && message.text.containsOnlyEmoji {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentEmojiTableViewCell", for: indexPath) as? SentEmojiTableViewCell else {
-                fatalError("The dequeued cell is not an instance of ReceivedEmojiTableViewCell")
+        } else  {
+            if message.messageType == .Text {
+                if message.text!.containsOnlyEmoji {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedEmojiTableViewCell", for: indexPath) as? ReceivedEmojiTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of ReceivedEmojiTableViewCell")
+                    }
+                    
+                    cell.emojiSymbols.text = message.text
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    cell.profilePicture.image = chatPartnerProfilePicture
+                    return cell
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageTableViewCell", for: indexPath) as? ReceivedMessageTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
+                    }
+                    
+                    cell.messageText.text = message.text
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    cell.profilePicture.image = chatPartnerProfilePicture
+                    return cell
+                }
+            } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedImageTableViewCell", for: indexPath) as? ReceivedImageTableViewCell else {
+                        fatalError("The dequeued cell is not an instance of ReceivedImageTableViewCell")
+                    }
+                
+                    cell.receivedImage.image = message.image
+                    cell.timestampLabel.text = message.timestamp.toString()
+                    cell.widthConstraint.constant = message.image?.size.width ?? 200
+                    return cell
             }
-            
-            cell.emojiSymbols.text = message.text
-            cell.timestampLabel.text = message.timestamp.toString()
-            return cell
-        } else if message.sender == PeerService.peerService.myPeerId {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SentMessageTableViewCell", for: indexPath) as? SentMessageTableViewCell else {
-                fatalError("The dequeued cell is not an instance of SentMessageTableViewCell")
-            }
-            
-            cell.messageText.text = message.text
-            cell.timestampLabel.text = message.timestamp.toString()
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReceivedMessageTableViewCell", for: indexPath) as? ReceivedMessageTableViewCell else {
-                fatalError("The dequeued cell is not an instance of ReceivedMessageTableViewCell")
-            }
-            
-            cell.messageText.text = message.text
-            cell.timestampLabel.text = message.timestamp.toString()
-            cell.profilePicture.image = chatPartnerProfilePicture
-            return cell
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -368,7 +415,7 @@ extension UILabel {
         let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         let linesRoundedUp = Int(ceil(textSize.height/charSize))
         return linesRoundedUp
-    } 
+    }
 }
 
 extension TimeInterval {
@@ -380,5 +427,38 @@ extension TimeInterval {
         let dateString = dayTimePeriodFormatter.string(from: date)
         
         return dateString
+    }
+}
+
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let imageToSend = info[.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        
+        guard let messageReceiver = chatPartner else {
+            print("No chat participant found")
+            return
+        }
+        
+        
+        do {
+            if let imageData = imageToSend.pngData() {
+                try PeerService.peerService.session.send(imageData, toPeers: [messageReceiver], with: .reliable)
+            } else {
+                print("Error sending image")
+                return
+            }
+            let newMessage = Message(sender: PeerService.peerService.myPeerId, receiver: chatPartner!, image: imageToSend)
+            PeerService.peerService.messages.append(newMessage)
+        } catch {
+            print("Error sending image")
+        }
+        
+//        DispatchQueue.main.async {
+//            self.chatTableView.insertRows(at: [IndexPath(row: self.numberOfMessages(fromAndTo: self.chatPartner!) - 1, section: 0)], with: .automatic)
+//        }
+        dismiss(animated: true, completion: nil)
     }
 }

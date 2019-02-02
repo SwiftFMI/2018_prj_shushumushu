@@ -422,6 +422,103 @@
                                             <outlet property="timestampLabel" destination="f7t-mh-3f9" id="E2A-Zz-ljm"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ReceivedImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedImageTableViewCell" rowHeight="200" id="Q3i-gQ-0KK" customClass="ReceivedImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="348" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q3i-gQ-0KK" id="2uX-37-DJQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qa0-GA-ZGJ">
+                                                    <rect key="frame" x="51" y="0.0" width="200" height="200"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="750" constant="200" id="HaL-mo-OAp"/>
+                                                        <constraint firstAttribute="height" constant="200" id="XHN-fq-amh"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3UY-uq-W82">
+                                                    <rect key="frame" x="8" y="140" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="93w-O7-XPF"/>
+                                                        <constraint firstAttribute="height" constant="35" id="QIc-bY-nqE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9p-HJ-sJp">
+                                                    <rect key="frame" x="16" y="183" width="31" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="5By-Ig-73s"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3UY-uq-W82" firstAttribute="leading" secondItem="2uX-37-DJQ" secondAttribute="leading" constant="8" id="aeO-P7-BZG"/>
+                                                <constraint firstItem="A9p-HJ-sJp" firstAttribute="leading" secondItem="2uX-37-DJQ" secondAttribute="leading" constant="16" id="bmX-A6-dbu"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qa0-GA-ZGJ" secondAttribute="trailing" constant="60" id="lIM-kD-ze7"/>
+                                                <constraint firstItem="Qa0-GA-ZGJ" firstAttribute="leading" secondItem="3UY-uq-W82" secondAttribute="trailing" constant="8" id="lUu-UA-Yt3"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qa0-GA-ZGJ" secondAttribute="bottom" constant="8" id="m0G-BR-r2a"/>
+                                                <constraint firstItem="A9p-HJ-sJp" firstAttribute="top" secondItem="3UY-uq-W82" secondAttribute="bottom" constant="8" id="qiv-En-QQn"/>
+                                                <constraint firstAttribute="bottom" secondItem="A9p-HJ-sJp" secondAttribute="bottom" constant="2" id="vAn-UR-ABu"/>
+                                                <constraint firstItem="Qa0-GA-ZGJ" firstAttribute="top" secondItem="2uX-37-DJQ" secondAttribute="top" id="zpZ-I0-uNd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profilePicture" destination="3UY-uq-W82" id="xEf-kW-ZHf"/>
+                                            <outlet property="receivedImage" destination="Qa0-GA-ZGJ" id="awm-xl-SGG"/>
+                                            <outlet property="timestampLabel" destination="A9p-HJ-sJp" id="odd-Zh-9Ax"/>
+                                            <outlet property="widthConstraint" destination="HaL-mo-OAp" id="T2p-ol-qnt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SentImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentImageTableViewCell" rowHeight="200" id="dA7-IR-rrm" customClass="SentImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="548" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dA7-IR-rrm" id="30C-Ds-jWU">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cmg-pa-5hg">
+                                                    <rect key="frame" x="324" y="131.5" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="0CH-ar-u57"/>
+                                                        <constraint firstAttribute="height" constant="35" id="fCV-n4-M7i"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-6f-kdD">
+                                                    <rect key="frame" x="320" y="174.5" width="31" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="WNA-6V-qvM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bjf-yO-t2f">
+                                                    <rect key="frame" x="116" y="8" width="200" height="200"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="NX8-pe-eDS"/>
+                                                        <constraint firstAttribute="width" constant="200" id="TG8-bx-jCM"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bjf-yO-t2f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="30C-Ds-jWU" secondAttribute="leadingMargin" constant="60" id="HI5-ea-hOa"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Z7s-6f-kdD" secondAttribute="bottom" constant="2" id="Ilj-8E-IL0"/>
+                                                <constraint firstItem="Cmg-pa-5hg" firstAttribute="leading" secondItem="bjf-yO-t2f" secondAttribute="trailing" constant="8" id="OP0-0e-f0o"/>
+                                                <constraint firstItem="bjf-yO-t2f" firstAttribute="top" secondItem="30C-Ds-jWU" secondAttribute="topMargin" id="hLQ-8i-dvX"/>
+                                                <constraint firstItem="Z7s-6f-kdD" firstAttribute="top" secondItem="Cmg-pa-5hg" secondAttribute="bottom" constant="8" id="nel-nq-9l3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bjf-yO-t2f" secondAttribute="bottom" constant="8" id="otb-qy-asz"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Z7s-6f-kdD" secondAttribute="trailing" constant="16" id="tnk-h9-1Yg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Cmg-pa-5hg" secondAttribute="trailing" constant="8" id="wdS-2M-k4k"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profilePicture" destination="Cmg-pa-5hg" id="z6O-Rz-mck"/>
+                                            <outlet property="sentImage" destination="bjf-yO-t2f" id="QZ7-Hz-qsP"/>
+                                            <outlet property="timestampLabel" destination="Z7s-6f-kdD" id="eIp-WK-ePR"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
