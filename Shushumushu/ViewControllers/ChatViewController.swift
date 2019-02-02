@@ -371,8 +371,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 
                     cell.receivedImage.image = message.image
+                    cell.profilePicture.image = chatPartnerProfilePicture
                     cell.timestampLabel.text = message.timestamp.toString()
-                    cell.widthConstraint.constant = message.image?.size.width ?? 200
                     return cell
             }
         }

@@ -10,18 +10,13 @@ import UIKit
 
 class SentImageTableViewCell: UITableViewCell {
     @IBOutlet weak var sentImage: UIImageView!
-    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var timestampLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        sentImage.layer.cornerRadius = 25
+        sentImage.clipsToBounds = true
+        sentImage.layer.borderColor = UIColor(red: 0, green: 0.51, blue: 1, alpha: 1).cgColor
+        sentImage.layer.borderWidth = 3
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

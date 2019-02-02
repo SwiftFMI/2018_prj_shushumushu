@@ -12,18 +12,15 @@ class ReceivedImageTableViewCell: UITableViewCell {
     @IBOutlet weak var receivedImage: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        receivedImage.layer.cornerRadius = 25
+        receivedImage.clipsToBounds = true
+        receivedImage.layer.borderColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1).cgColor
+        receivedImage.layer.borderWidth = 3
         
-        // Initialization code
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.layer.masksToBounds = true
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
