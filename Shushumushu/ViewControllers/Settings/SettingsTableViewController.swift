@@ -16,7 +16,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        deviceName.text = PeerService.peerService.myPeerId.displayName
+        deviceName.text = PeerService.shared.myPeerId.displayName
         
         if let profilePictureData = UserDefaults.standard.data(forKey: "profilePic") {
             profilePicture.image = UIImage(data: profilePictureData)
@@ -37,12 +37,12 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func didChangeVisibility(_ sender: UISwitch) {
         if sender.isOn {
-            PeerService.peerService.serviceAdvertiser.startAdvertisingPeer()
-            PeerService.peerService.serviceBrowser.startBrowsingForPeers()
+            PeerService.shared.serviceAdvertiser.startAdvertisingPeer()
+            PeerService.shared.serviceBrowser.startBrowsingForPeers()
         }
         else {
-            PeerService.peerService.serviceAdvertiser.stopAdvertisingPeer()
-            PeerService.peerService.serviceBrowser.stopBrowsingForPeers()
+            PeerService.shared.serviceAdvertiser.stopAdvertisingPeer()
+            PeerService.shared.serviceBrowser.stopBrowsingForPeers()
         }
     }
     
@@ -52,7 +52,7 @@ class SettingsTableViewController: UITableViewController {
 
 extension SettingsTableViewController: NameEditorTableViewControllerDelegate {
     func NameEditorTableViewControllerDelegateDidUpdatePeerService(_ nameEditorTableViewController: NameEditorTableViewController) {
-        deviceName.text = PeerService.peerService.myPeerId.displayName  
+        deviceName.text = PeerService.shared.myPeerId.displayName  
     }
 }
 

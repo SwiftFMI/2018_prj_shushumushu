@@ -30,7 +30,7 @@ class NameEditorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameTextField.text = PeerService.peerService.myPeerId.displayName
+        nameTextField.text = PeerService.shared.myPeerId.displayName
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(rightBarButtonTapped(_:)))
         

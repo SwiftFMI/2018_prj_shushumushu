@@ -19,9 +19,14 @@ protocol PeerServiceDelegate: class {
     func lostPeer(at index: Int)
 }
 
+extension Notification.Name {
+    
+    static let messageReceived = Notification.Name("message-received")
+}
+
 class PeerService: NSObject {
     
-    static var peerService = PeerService()
+    static var shared = PeerService()
     
     private let PeerServiceType = "ssms-mpc"
     
@@ -69,7 +74,23 @@ class PeerService: NSObject {
         serviceAdvertiser.stopAdvertisingPeer()
         serviceBrowser.stopBrowsingForPeers()
     }
+}
+
+// MARK: - Messages Count
+
+extension PeerService {
     
+    func numberOfMessages(fromAndTo peer: MCPeerID) -> Int {
+        var numberOfMessages = 0
+        
+        for message in messages {
+            if (message.sender == peer && message.receiver == myPeerId) || (message.sender == myPeerId && message.receiver == peer) {
+                numberOfMessages += 1
+            }
+        }
+        
+        return numberOfMessages
+    }
 }
 
 // MARK: - Advertiser Delegate

@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="555"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedMessageTableViewCell" rowHeight="80" id="wR2-N8-Hwg" customClass="ReceivedMessageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedMessageTableViewCell" rowHeight="80" id="wR2-N8-Hwg" customClass="MessageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wR2-N8-Hwg" id="hPx-Qp-dlh">
@@ -277,7 +277,7 @@
                                             <outlet property="timestampLabel" destination="THm-6o-6Km" id="9eg-aI-prB"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentMessageTableViewCell" rowHeight="80" id="gRp-j3-21M" customClass="SentMessageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentMessageTableViewCell" rowHeight="80" id="gRp-j3-21M" customClass="MessageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRp-j3-21M" id="Trl-o6-dB7">
@@ -334,7 +334,7 @@
                                             <outlet property="timestampLabel" destination="2Mj-YP-CwI" id="5mh-B9-B5i"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedEmojiTableViewCell" rowHeight="80" id="O0M-iw-rzy" customClass="ReceivedEmojiTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedEmojiTableViewCell" rowHeight="80" id="O0M-iw-rzy" customClass="EmojiTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="188" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O0M-iw-rzy" id="FdU-sc-0Ox">
@@ -383,7 +383,7 @@
                                             <outlet property="timestampLabel" destination="teb-e1-hPQ" id="LkF-lR-ntw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentEmojiTableViewCell" rowHeight="80" id="gpC-Z2-ipM" customClass="SentEmojiTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentEmojiTableViewCell" rowHeight="80" id="gpC-Z2-ipM" customClass="EmojiTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="268" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gpC-Z2-ipM" id="bg1-HL-ff9">
@@ -422,7 +422,7 @@
                                             <outlet property="timestampLabel" destination="f7t-mh-3f9" id="E2A-Zz-ljm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ReceivedImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedImageTableViewCell" rowHeight="240" id="Q3i-gQ-0KK" customClass="ReceivedImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ReceivedImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceivedImageTableViewCell" rowHeight="240" id="Q3i-gQ-0KK" customClass="ImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="348" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q3i-gQ-0KK" id="2uX-37-DJQ">
@@ -464,16 +464,16 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentImageView" destination="Qa0-GA-ZGJ" id="7ib-ps-7wq"/>
                                             <outlet property="profilePicture" destination="3UY-uq-W82" id="xEf-kW-ZHf"/>
-                                            <outlet property="receivedImage" destination="Qa0-GA-ZGJ" id="awm-xl-SGG"/>
                                             <outlet property="timestampLabel" destination="A9p-HJ-sJp" id="odd-Zh-9Ax"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SentImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentImageTableViewCell" rowHeight="240" id="dA7-IR-rrm" customClass="SentImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SentImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SentImageTableViewCell" rowHeight="240" id="dA7-IR-rrm" customClass="ImageTableViewCell" customModule="Shushumushu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="588" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dA7-IR-rrm" id="30C-Ds-jWU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="239.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-6f-kdD">
@@ -502,20 +502,64 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="sentImage" destination="bjf-yO-t2f" id="QZ7-Hz-qsP"/>
+                                            <outlet property="contentImageView" destination="bjf-yO-t2f" id="R79-Gr-4E9"/>
                                             <outlet property="timestampLabel" destination="Z7s-6f-kdD" id="eIp-WK-ePR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="7Zw-Hn-YaD" id="g2K-f9-4Zy"/>
+                                    <outlet property="delegate" destination="7Zw-Hn-YaD" id="zxI-la-tMt"/>
+                                </connections>
                             </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V34-lx-eQv">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Q0c-J0-WuD"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="lvs-KJ-vYN" kind="embed" id="4X0-YA-hGg"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-6f-0H8" customClass="RoundedButton" customModule="Shushumushu" customModuleProvider="target">
+                                <rect key="frame" x="162.5" y="561" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.1764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="GXv-8d-hHs"/>
+                                    <constraint firstAttribute="height" constant="50" id="gdu-lZ-Lhj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <state key="normal" title="0">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="unreadMessageButtonTapped:" destination="7Zw-Hn-YaD" eventType="touchUpInside" id="pzK-40-YLE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="V34-lx-eQv" firstAttribute="trailing" secondItem="cYv-6y-oBh" secondAttribute="trailing" id="3ly-7N-vP4"/>
                             <constraint firstItem="2RI-cc-EtM" firstAttribute="leading" secondItem="cYv-6y-oBh" secondAttribute="leading" id="9ws-dE-HZW"/>
                             <constraint firstItem="cYv-6y-oBh" firstAttribute="bottom" secondItem="2RI-cc-EtM" secondAttribute="bottom" constant="48" id="HWL-dy-wnf"/>
+                            <constraint firstItem="V34-lx-eQv" firstAttribute="top" secondItem="2RI-cc-EtM" secondAttribute="bottom" id="YDn-ND-RId"/>
+                            <constraint firstItem="3YU-6f-0H8" firstAttribute="centerX" secondItem="KWP-aU-vEW" secondAttribute="centerX" id="dxs-lF-T1U"/>
                             <constraint firstItem="cYv-6y-oBh" firstAttribute="trailing" secondItem="2RI-cc-EtM" secondAttribute="trailing" id="s4c-hy-Tvd"/>
                             <constraint firstItem="2RI-cc-EtM" firstAttribute="top" secondItem="cYv-6y-oBh" secondAttribute="top" id="sLS-py-5fw"/>
+                            <constraint firstItem="2RI-cc-EtM" firstAttribute="bottom" secondItem="3YU-6f-0H8" secondAttribute="bottom" constant="8" id="sj2-0O-lRp"/>
+                            <constraint firstItem="V34-lx-eQv" firstAttribute="leading" secondItem="cYv-6y-oBh" secondAttribute="leading" id="uMD-9q-9Kw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cYv-6y-oBh"/>
                         <connections>
@@ -525,6 +569,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="2RI-cc-EtM" id="atq-Bj-olX"/>
                         <outlet property="tableViewBottomConstraint" destination="HWL-dy-wnf" id="5qO-Ua-Fz1"/>
+                        <outlet property="unreadMessagesButton" destination="3YU-6f-0H8" id="X48-DU-voD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k2W-5v-Sgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -703,5 +748,97 @@
             </objects>
             <point key="canvasLocation" x="-743.20000000000005" y="107.49625187406298"/>
         </scene>
+        <!--Chat Input View Controller-->
+        <scene sceneID="Tiw-Wk-uNf">
+            <objects>
+                <viewController id="lvs-KJ-vYN" customClass="ChatInputViewController" customModule="Shushumushu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k3u-4n-FpM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2QB-lt-keU">
+                                <rect key="frame" x="48" y="6" width="263" height="36"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="sendButtonTapped:" destination="lvs-KJ-vYN" eventType="primaryActionTriggered" id="owc-ET-wgV"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylv-60-Khw">
+                                <rect key="frame" x="8" y="8" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="61j-Km-imB"/>
+                                    <constraint firstAttribute="height" constant="32" id="Iug-pr-M07"/>
+                                    <constraint firstAttribute="width" constant="32" id="SJX-Ah-DnG"/>
+                                    <constraint firstAttribute="width" constant="32" id="iwD-6X-zWY"/>
+                                </constraints>
+                                <state key="normal" image="CameraIcon"/>
+                                <connections>
+                                    <action selector="cameraButtonTapped:" destination="lvs-KJ-vYN" eventType="touchUpInside" id="dWc-t6-auc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elc-8F-8Ai" customClass="RoundedButton" customModule="Shushumushu" customModuleProvider="target">
+                                <rect key="frame" x="315" y="6" width="54" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="ZjS-cw-mtZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundedCorners">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendButtonTapped:" destination="lvs-KJ-vYN" eventType="touchUpInside" id="KQR-qd-cO6"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhE-eX-Z0b" userLabel="Separator">
+                                <rect key="frame" x="0.0" y="-1" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.8592679794520548" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="QCC-Ha-Abd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.94812178938356162" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="iT6-kG-mH2" firstAttribute="bottom" secondItem="2QB-lt-keU" secondAttribute="bottom" constant="6" id="0Mr-Vf-RA8"/>
+                            <constraint firstItem="mhE-eX-Z0b" firstAttribute="leading" secondItem="k3u-4n-FpM" secondAttribute="leading" id="B6h-ZC-Zam"/>
+                            <constraint firstAttribute="trailing" secondItem="mhE-eX-Z0b" secondAttribute="trailing" id="TnE-xJ-8jW"/>
+                            <constraint firstItem="ylv-60-Khw" firstAttribute="centerY" secondItem="k3u-4n-FpM" secondAttribute="centerY" id="Vq0-7L-pLd"/>
+                            <constraint firstItem="2QB-lt-keU" firstAttribute="top" secondItem="iT6-kG-mH2" secondAttribute="top" constant="6" id="XyC-sd-mqy"/>
+                            <constraint firstItem="2QB-lt-keU" firstAttribute="leading" secondItem="ylv-60-Khw" secondAttribute="trailing" constant="8" id="apL-SL-r5h"/>
+                            <constraint firstItem="ylv-60-Khw" firstAttribute="leading" secondItem="iT6-kG-mH2" secondAttribute="leading" constant="8" id="cDj-46-hxa"/>
+                            <constraint firstItem="elc-8F-8Ai" firstAttribute="top" secondItem="mhE-eX-Z0b" secondAttribute="bottom" constant="6" id="dNb-ma-snZ"/>
+                            <constraint firstItem="iT6-kG-mH2" firstAttribute="bottom" secondItem="elc-8F-8Ai" secondAttribute="bottom" constant="6" id="fEl-hU-6Wa"/>
+                            <constraint firstItem="iT6-kG-mH2" firstAttribute="trailing" secondItem="elc-8F-8Ai" secondAttribute="trailing" constant="6" id="huK-og-l9r"/>
+                            <constraint firstItem="elc-8F-8Ai" firstAttribute="leading" secondItem="2QB-lt-keU" secondAttribute="trailing" constant="4" id="kV9-dU-Ddq"/>
+                            <constraint firstItem="mhE-eX-Z0b" firstAttribute="top" secondItem="k3u-4n-FpM" secondAttribute="top" constant="-1" id="oWH-fM-Y70"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iT6-kG-mH2"/>
+                    </view>
+                    <connections>
+                        <outlet property="sendButton" destination="elc-8F-8Ai" id="Xua-ol-nLz"/>
+                        <outlet property="textField" destination="2QB-lt-keU" id="rYB-RG-FpT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0rP-3q-1tg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="1358"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="CameraIcon" width="64" height="64"/>
+    </resources>
 </document>

@@ -13,7 +13,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     let cellIdentifier = "PeerTableViewCell"
     
     func foundPeer() {
-        tableView.insertRows(at: [IndexPath(row: PeerService.peerService.foundPeers.count - 1, section: 0)], with: .automatic)
+        tableView.insertRows(at: [IndexPath(row: PeerService.shared.foundPeers.count - 1, section: 0)], with: .automatic)
     }
     
     func lostPeer(at index: Int) {
@@ -23,14 +23,14 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.setHidesBackButton(true, animated: true)
-        navigationItem.title = PeerService.peerService.myPeerId.displayName
-        PeerService.peerService.delegate = self
+        navigationItem.title = PeerService.shared.myPeerId.displayName
+        PeerService.shared.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.setHidesBackButton(true, animated: true)
-        navigationItem.title = PeerService.peerService.myPeerId.displayName
+        navigationItem.title = PeerService.shared.myPeerId.displayName
     }
     
     // MARK: - Table view data source
@@ -40,7 +40,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PeerService.peerService.foundPeers.count
+        return PeerService.shared.foundPeers.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +48,7 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
         }
         
-        let peer: Peer = PeerService.peerService.foundPeers[indexPath.row]
+        let peer: Peer = PeerService.shared.foundPeers[indexPath.row]
         cell.peerName.text = peer.id.displayName
         cell.profilePicture.image = peer.profilePicture
         return cell
@@ -57,9 +57,9 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var nowInterval = Date().timeIntervalSince1970
         let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
-        let selectedPeer = PeerService.peerService.foundPeers[indexPath.row].id
+        let selectedPeer = PeerService.shared.foundPeers[indexPath.row].id
         
-        PeerService.peerService.serviceBrowser.invitePeer(selectedPeer, to: PeerService.peerService.session, withContext: timestampData, timeout: 30)
+        PeerService.shared.serviceBrowser.invitePeer(selectedPeer, to: PeerService.shared.session, withContext: timestampData, timeout: 30)
         performSegue(withIdentifier: "ChatViewController", sender: selectedPeer)
     }
     
