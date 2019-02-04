@@ -60,11 +60,8 @@ extension ChatViewController: ChatInputViewControllerDelegate {
             try PeerService.shared.session.send(data, toPeers: [messageReceiver], with: .reliable)
             PeerService.shared.messages.append(newMessage)
             
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.chatTableView.insertRows(at: [IndexPath(row: strongSelf.chatTableView.numberOfRows(inSection: 0), section: 0)], with: .automatic)
-                strongSelf.scrollToBottom(true)
-            }
+            chatTableView.insertRows(at: [IndexPath(row: chatTableView.numberOfRows(inSection: 0), section: 0)], with: .automatic)
+            scrollToBottom(true)
             
         } catch { showError(withMessage: error.localizedDescription) }
     }
