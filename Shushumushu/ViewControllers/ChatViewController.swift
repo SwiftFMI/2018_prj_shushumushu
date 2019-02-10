@@ -23,7 +23,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = chatPartner?.displayName
         addNotificationObservers()
-        
+        if traitCollection.forceTouchCapability == .available { registerForPreviewing(with: self, sourceView: chatTableView) }
         (children.first(where: { $0 is ChatInputViewController }) as? ChatInputViewController)?.delegate = self
     }
     
@@ -141,15 +141,51 @@ extension ChatViewController {
     }
 }
 
+// MARK: - Force Touch Delegate
+
+extension ChatViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = chatTableView.indexPathForRow(at: location) {
+            if let cell = chatTableView.cellForRow(at: indexPath) as? ImageTableViewCell {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController
+                vc?.image = cell.contentImageView.image
+                return vc
+            }
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+}
+
 // MARK: - Helpers
 
 extension ChatViewController {
+    
+    /// Checks if a view contains a location
+    private func touchedView(_ view: UIView, location: CGPoint) -> Bool {
+        let locationInView = view.convert(location, from: view)
+        return view.bounds.contains(locationInView)
+    }
+    
+    /// Sets up an 'ImagePreviewViewController' for force touch
+    ///
+    /// - Parameter image: the image to preview
+    private func viewControllerFor(image: UIImage?) -> UIViewController {
+        let imagePreviewVC = ImagePreviewViewController()
+        imagePreviewVC.previewedImageView?.image = image
+        return imagePreviewVC
+    }
     
     /// Presents alert with error message.
     ///
     /// - Parameter message: the error message.
     private func showError(withMessage message: String = "An Error has occured") {
-        
+        print(message)
     }
     
     /// Checks if the message before the last one is at the bottom

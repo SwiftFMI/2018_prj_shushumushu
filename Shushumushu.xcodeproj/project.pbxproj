@@ -25,6 +25,7 @@
 		43905FB52207A05A000BA68C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FB32207A05A000BA68C /* Helpers.swift */; };
 		43905FB62207A05A000BA68C /* CustomControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FB42207A05A000BA68C /* CustomControls.swift */; };
 		43905FB82207A75F000BA68C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FB72207A75F000BA68C /* RoundedButton.swift */; };
+		43905FBA2210B7F7000BA68C /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FB92210B7F7000BA68C /* ImagePreviewViewController.swift */; };
 		439843562198D0CB00018215 /* PeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439843552198D0CB00018215 /* PeerTableViewController.swift */; };
 		43E964002204E82D002B16F5 /* MCPeerID+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E963FF2204E82D002B16F5 /* MCPeerID+Reusable.swift */; };
 		43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7E30821995D9B000BBCDD /* PeerService.swift */; };
@@ -53,6 +54,7 @@
 		43905FB32207A05A000BA68C /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		43905FB42207A05A000BA68C /* CustomControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomControls.swift; sourceTree = "<group>"; };
 		43905FB72207A75F000BA68C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		43905FB92210B7F7000BA68C /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		439843552198D0CB00018215 /* PeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewController.swift; sourceTree = "<group>"; };
 		43E963FF2204E82D002B16F5 /* MCPeerID+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCPeerID+Reusable.swift"; sourceTree = "<group>"; };
 		43F7E30821995D9B000BBCDD /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				43475ACF21E69EB3006F5B8C /* ChatViewController.swift */,
 				E5C6EFC521F095D50028662F /* SetupViewController.swift */,
+				4310EDF6219B259000622428 /* NameEditorTableViewController.swift */,
 				439843552198D0CB00018215 /* PeerTableViewController.swift */,
 				4308E6372198CF7600B69050 /* PeerTableViewCell.swift */,
 				4310EDF9219B25E600622428 /* Settings */,
@@ -138,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */,
-				4310EDF6219B259000622428 /* NameEditorTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				43905FB12207A031000BA68C /* ChatInputViewController.swift */,
+				43905FB92210B7F7000BA68C /* ImagePreviewViewController.swift */,
 				43475AC921E3CDD3006F5B8C /* Message.swift */,
 				434772C621F8F3170002FA5C /* ChatCells */,
 			);
@@ -261,6 +264,7 @@
 				4308E6322198C74D00B69050 /* RoundedView.swift in Sources */,
 				43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */,
 				43905FB52207A05A000BA68C /* Helpers.swift in Sources */,
+				43905FBA2210B7F7000BA68C /* ImagePreviewViewController.swift in Sources */,
 				43905FAF2207A01F000BA68C /* ChatTableViewCell.swift in Sources */,
 				43905FAE2207A01F000BA68C /* EmojiTableViewCell.swift in Sources */,
 				43905FB22207A031000BA68C /* ChatInputViewController.swift in Sources */,
@@ -411,14 +415,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L24TQ8W95;
+				DEVELOPMENT_TEAM = V4PC2DAB78;
 				INFOPLIST_FILE = Shushumushu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Dimitar.Shushumushu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dimitar.Shushumushua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -430,14 +434,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2L24TQ8W95;
+				DEVELOPMENT_TEAM = V4PC2DAB78;
 				INFOPLIST_FILE = Shushumushu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Dimitar.Shushumushu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dimitar.Shushumushua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

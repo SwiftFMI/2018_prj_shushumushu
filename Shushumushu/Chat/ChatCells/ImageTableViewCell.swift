@@ -20,7 +20,7 @@ extension ImageTableViewCell {
 // MARK: - Properties
 
 class ImageTableViewCell: UITableViewCell {
-    @IBOutlet private weak var contentImageView: UIImageView!
+    @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet private weak var profilePicture: UIImageView?
     @IBOutlet private weak var timestampLabel: UILabel!
     

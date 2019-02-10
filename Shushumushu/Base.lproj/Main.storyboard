@@ -473,7 +473,7 @@
                                         <rect key="frame" x="0.0" y="588" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dA7-IR-rrm" id="30C-Ds-jWU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="239.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-6f-kdD">
@@ -581,6 +581,38 @@
             </objects>
             <point key="canvasLocation" x="932" y="859.52023988005999"/>
         </scene>
+        <!--ImagePreviewViewController-->
+        <scene sceneID="un0-pZ-ojE">
+            <objects>
+                <viewController storyboardIdentifier="ImagePreviewViewController" title="ImagePreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kju-HB-Bah" customClass="ImagePreviewViewController" customModule="Shushumushu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8K6-Qp-pEA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="39L-XT-zLh">
+                                <rect key="frame" x="0.0" y="183.5" width="375" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="GkU-SJ-gjM"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="centerY" secondItem="8K6-Qp-pEA" secondAttribute="centerY" id="5Ul-HU-5h9"/>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="leading" secondItem="hHV-TN-mIZ" secondAttribute="leading" id="Kmc-dq-M2D"/>
+                            <constraint firstItem="hHV-TN-mIZ" firstAttribute="trailing" secondItem="39L-XT-zLh" secondAttribute="trailing" id="owX-mu-kDL"/>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="centerX" secondItem="8K6-Qp-pEA" secondAttribute="centerX" id="zgh-0A-tLq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hHV-TN-mIZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="previewedImageView" destination="39L-XT-zLh" id="26x-RT-NzS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zqn-bN-ZwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1740" y="860"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="z8g-Lq-daH">
             <objects>
@@ -589,7 +621,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="T9b-Yl-c6C">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="T9b-Yl-c6C">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
