@@ -581,35 +581,51 @@
             </objects>
             <point key="canvasLocation" x="932" y="859.52023988005999"/>
         </scene>
-        <!--ImagePreviewViewController-->
+        <!--Image Preview View Controller-->
         <scene sceneID="un0-pZ-ojE">
             <objects>
-                <viewController storyboardIdentifier="ImagePreviewViewController" title="ImagePreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kju-HB-Bah" customClass="ImagePreviewViewController" customModule="Shushumushu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagePreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kju-HB-Bah" customClass="ImagePreviewViewController" customModule="Shushumushu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8K6-Qp-pEA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="39L-XT-zLh">
-                                <rect key="frame" x="0.0" y="183.5" width="375" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="GkU-SJ-gjM"/>
-                                </constraints>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="39L-XT-zLh">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="qZq-wc-Cn0" appends="YES" id="y5q-Ma-10p"/>
+                                    <outletCollection property="gestureRecognizers" destination="XnU-dg-UA0" appends="YES" id="w9o-R1-Lg8"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="39L-XT-zLh" firstAttribute="centerY" secondItem="8K6-Qp-pEA" secondAttribute="centerY" id="5Ul-HU-5h9"/>
-                            <constraint firstItem="39L-XT-zLh" firstAttribute="leading" secondItem="hHV-TN-mIZ" secondAttribute="leading" id="Kmc-dq-M2D"/>
-                            <constraint firstItem="hHV-TN-mIZ" firstAttribute="trailing" secondItem="39L-XT-zLh" secondAttribute="trailing" id="owX-mu-kDL"/>
-                            <constraint firstItem="39L-XT-zLh" firstAttribute="centerX" secondItem="8K6-Qp-pEA" secondAttribute="centerX" id="zgh-0A-tLq"/>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="trailing" secondItem="hHV-TN-mIZ" secondAttribute="trailing" id="H1o-YG-YhV"/>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="top" secondItem="hHV-TN-mIZ" secondAttribute="top" id="HV7-Hg-zCg"/>
+                            <constraint firstItem="39L-XT-zLh" firstAttribute="leading" secondItem="hHV-TN-mIZ" secondAttribute="leading" id="iY8-vv-jvB"/>
+                            <constraint firstItem="hHV-TN-mIZ" firstAttribute="bottom" secondItem="39L-XT-zLh" secondAttribute="bottom" id="mkp-fd-cJY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hHV-TN-mIZ"/>
                     </view>
                     <connections>
+                        <outlet property="previewedImagePanGesture" destination="XnU-dg-UA0" id="Kg8-O3-ivG"/>
+                        <outlet property="previewedImagePinchGesture" destination="qZq-wc-Cn0" id="aQT-4C-KDO"/>
                         <outlet property="previewedImageView" destination="39L-XT-zLh" id="26x-RT-NzS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqn-bN-ZwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="qZq-wc-Cn0">
+                    <connections>
+                        <action selector="pinchGestureAction:" destination="Kju-HB-Bah" id="jFc-wt-yZO"/>
+                        <outlet property="delegate" destination="Kju-HB-Bah" id="4YP-bT-fs4"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="XnU-dg-UA0">
+                    <connections>
+                        <action selector="panGestureAction:" destination="Kju-HB-Bah" id="voh-uL-N3E"/>
+                        <outlet property="delegate" destination="Kju-HB-Bah" id="wyc-Md-lZ8"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1740" y="860"/>
         </scene>
@@ -621,7 +637,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="T9b-Yl-c6C">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="T9b-Yl-c6C">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

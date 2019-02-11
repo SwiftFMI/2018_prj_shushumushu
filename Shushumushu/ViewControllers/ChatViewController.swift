@@ -150,6 +150,7 @@ extension ChatViewController: UIViewControllerPreviewingDelegate {
             if let cell = chatTableView.cellForRow(at: indexPath) as? ImageTableViewCell {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController
+                previewingContext.sourceRect = cell.convert(cell.contentImageView.frame, to: chatTableView)
                 vc?.image = cell.contentImageView.image
                 return vc
             }
