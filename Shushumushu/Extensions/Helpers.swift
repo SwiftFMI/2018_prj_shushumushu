@@ -29,3 +29,14 @@ extension UILabel {
         return linesRoundedUp
     }
 }
+
+extension CGAffineTransform {
+    
+    var scaleX: CGFloat {
+        return (a > 0 ? 1 : -1) * sqrt (a*a + c*c)
+    }
+    
+    var scaleY: CGFloat {
+        return (d > 0 ? 1 : -1) * sqrt (b*b + d*d)
+    }
+}

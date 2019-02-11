@@ -13,8 +13,6 @@ import UIKit
 class ImagePreviewViewController: UIViewController {
     
     @IBOutlet weak var previewedImageView: UIImageView!
-    @IBOutlet var previewedImagePinchGesture: UIPinchGestureRecognizer!
-    @IBOutlet var previewedImagePanGesture: UIPanGestureRecognizer!
     
     var image: UIImage?
     
@@ -30,14 +28,35 @@ class ImagePreviewViewController: UIViewController {
 extension ImagePreviewViewController {
     
     @IBAction func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
-        previewedImageView.transform = previewedImageView.transform.scaledBy(x: sender.scale, y: sender.scale)
+        guard sender.view != nil else { return }
+        let currentScale = sender.view!.transform.scaleX
+        let minScale = CGFloat(1.0)
+        let maxScale = CGFloat(3.0)
+        let zoomSpeed = CGFloat(0.5)
+        var deltaScale = sender.scale
+        
+        deltaScale = ((deltaScale - 1) * zoomSpeed) + 1;
+        deltaScale = min(deltaScale, maxScale / currentScale)
+        deltaScale = max(deltaScale, minScale / currentScale)
+        
+        previewedImageView.transform = previewedImageView.transform.scaledBy(x: deltaScale, y: deltaScale)
         sender.scale = 1
     }
     
     @IBAction func panGestureAction(_ sender: UIPanGestureRecognizer) {
-        let newPoint = CGPoint(x: previewedImageView.center.x + sender.translation(in: previewedImageView).x, y: previewedImageView.center.y + sender.translation(in: previewedImageView).y)
-        previewedImageView.center = newPoint
+        let newCenter = CGPoint(x: previewedImageView.center.x + sender.translation(in: previewedImageView).x, y: previewedImageView.center.y + sender.translation(in: previewedImageView).y)
+        if view.layer.contains(newCenter) {
+            previewedImageView.center = newCenter
+        }
         sender.setTranslation(CGPoint(x: 0, y: 0), in: previewedImageView)
+    }
+    
+    @IBAction func doubleTapGesture(_ sender: UITapGestureRecognizer) {
+        let viewCenter = view.center
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.previewedImageView.transform = CGAffineTransform.identity
+            self?.previewedImageView.center = viewCenter
+        })
     }
 }
 

@@ -595,6 +595,7 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="qZq-wc-Cn0" appends="YES" id="y5q-Ma-10p"/>
                                     <outletCollection property="gestureRecognizers" destination="XnU-dg-UA0" appends="YES" id="w9o-R1-Lg8"/>
+                                    <outletCollection property="gestureRecognizers" destination="Gui-ZO-pER" appends="YES" id="RjL-06-QaG"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -608,8 +609,6 @@
                         <viewLayoutGuide key="safeArea" id="hHV-TN-mIZ"/>
                     </view>
                     <connections>
-                        <outlet property="previewedImagePanGesture" destination="XnU-dg-UA0" id="Kg8-O3-ivG"/>
-                        <outlet property="previewedImagePinchGesture" destination="qZq-wc-Cn0" id="aQT-4C-KDO"/>
                         <outlet property="previewedImageView" destination="39L-XT-zLh" id="26x-RT-NzS"/>
                     </connections>
                 </viewController>
@@ -623,9 +622,15 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="XnU-dg-UA0">
                     <connections>
                         <action selector="panGestureAction:" destination="Kju-HB-Bah" id="voh-uL-N3E"/>
-                        <outlet property="delegate" destination="Kju-HB-Bah" id="wyc-Md-lZ8"/>
+                        <outlet property="delegate" destination="Kju-HB-Bah" id="Wzz-iP-YZv"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Gui-ZO-pER">
+                    <connections>
+                        <action selector="doubleTapGesture:" destination="Kju-HB-Bah" id="xwh-wT-OE4"/>
+                        <outlet property="delegate" destination="Kju-HB-Bah" id="2Zd-cg-6F1"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1740" y="860"/>
         </scene>
