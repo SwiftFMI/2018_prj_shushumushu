@@ -38,12 +38,14 @@ class ChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: .messageReceived, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .messageSeen, object: nil)
     }
     
     private func addNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(messageReceivedAction), name: .messageReceived, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(messagesSeenAction), name: .messageSeen, object: nil)
     }
 }
 
@@ -72,7 +74,7 @@ extension ChatViewController: ChatInputViewControllerDelegate {
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PeerService.shared.numberOfMessages(fromAndTo: chatPartner!)
+        return PeerService.shared.totalNumberOfMessages(with: chatPartner!)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,6 +92,19 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
             unreadMessagesCount = 0
             unreadMessagesButton.hideUnreadMessagesView()
+            PeerService.shared.sendNotification(String.messageSeen, to: chatPartner!)
+        }
+    }
+}
+
+// Mark: - Notification handlers
+
+extension ChatViewController {
+    
+    @objc func messagesSeenAction(notification: NSNotification) {
+        
+        DispatchQueue.main.async {
+            (self.chatTableView.cellForRow(at: IndexPath(row: PeerService.shared.indexOfLastMessageSentByMe(with: self.chatPartner!), section: 0)) as? ChatTableViewCell)?.addSeenToTimestampLabel()
         }
     }
 }
@@ -217,6 +232,7 @@ extension ChatViewController {
             }
         }
         
+        PeerService.shared.sendNotification(String.messageSeen, to: chatPartner!)
         print("Scrolled to bottom")
     }
 }

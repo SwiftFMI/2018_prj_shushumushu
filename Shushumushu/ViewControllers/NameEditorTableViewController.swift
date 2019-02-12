@@ -9,12 +9,6 @@
 import UIKit
 import MultipeerConnectivity
 
-// MARK: - Notifications
-
-extension Notification.Name {
-    static let nameUpdated = Notification.Name("NameEditorTableVivarontrollerDidUpdateName")
-}
-
 //MARK: - NameEditorTableViewControllerDelegate
 
 protocol NameEditorTableViewControllerDelegate: class {

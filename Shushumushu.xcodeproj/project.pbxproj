@@ -17,6 +17,7 @@
 		43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475AC921E3CDD3006F5B8C /* Message.swift */; };
 		43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475ACF21E69EB3006F5B8C /* ChatViewController.swift */; };
 		434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C421F8F0050002FA5C /* String+Emoji.swift */; };
+		435C21942212F5EA0063E8DA /* String+CustomNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C21932212F5EA0063E8DA /* String+CustomNotification.swift */; };
 		43905FAD2207A01F000BA68C /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FA92207A01F000BA68C /* MessageTableViewCell.swift */; };
 		43905FAE2207A01F000BA68C /* EmojiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FAA2207A01F000BA68C /* EmojiTableViewCell.swift */; };
 		43905FAF2207A01F000BA68C /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43905FAB2207A01F000BA68C /* ChatTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 		43475AC921E3CDD3006F5B8C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		43475ACF21E69EB3006F5B8C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		434772C421F8F0050002FA5C /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
+		435C21932212F5EA0063E8DA /* String+CustomNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CustomNotification.swift"; sourceTree = "<group>"; };
 		43905FA92207A01F000BA68C /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		43905FAA2207A01F000BA68C /* EmojiTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTableViewCell.swift; sourceTree = "<group>"; };
 		43905FAB2207A01F000BA68C /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				43905FB42207A05A000BA68C /* CustomControls.swift */,
 				43905FB32207A05A000BA68C /* Helpers.swift */,
 				434772C421F8F0050002FA5C /* String+Emoji.swift */,
+				435C21932212F5EA0063E8DA /* String+CustomNotification.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			files = (
 				43905FB62207A05A000BA68C /* CustomControls.swift in Sources */,
 				43F7E30921995D9B000BBCDD /* PeerService.swift in Sources */,
+				435C21942212F5EA0063E8DA /* String+CustomNotification.swift in Sources */,
 				4310EDF7219B259000622428 /* NameEditorTableViewController.swift in Sources */,
 				4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */,
 				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,

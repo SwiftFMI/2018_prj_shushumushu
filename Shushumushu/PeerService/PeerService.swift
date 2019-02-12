@@ -14,14 +14,17 @@ struct Peer {
     var profilePicture: UIImage
 }
 
-protocol PeerServiceDelegate: class {
-    func foundPeer()
-    func lostPeer(at index: Int)
+extension Peer {
+    
+    func compareId(with peer: Peer) -> Bool {
+        return id == peer.id
+    }
 }
 
-extension Notification.Name {
+protocol PeerServiceDelegate: class {
     
-    static let messageReceived = Notification.Name("message-received")
+    func foundPeer()
+    func lostPeer(at index: Int)
 }
 
 class PeerService: NSObject {
@@ -80,7 +83,7 @@ class PeerService: NSObject {
 
 extension PeerService {
     
-    func numberOfMessages(fromAndTo peer: MCPeerID) -> Int {
+    func totalNumberOfMessages(with peer: MCPeerID) -> Int {
         var numberOfMessages = 0
         
         for message in messages {
@@ -91,9 +94,22 @@ extension PeerService {
         
         return numberOfMessages
     }
+    
+    func indexOfLastMessageSentByMe(with peer: MCPeerID) -> Int {
+        let numberOfMessages = totalNumberOfMessages(with: peer)
+        
+        for index in stride(from: numberOfMessages - 1, through: 0, by: -1) {
+            if messages[index].sender == myPeerId && messages[index].receiver == peer {
+                return index
+            }
+        }
+        
+        return numberOfMessages
+    }
 }
 
 // MARK: - Advertiser Delegate
+
 extension PeerService: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print("Received invitation from peer \(peerID)")
@@ -116,6 +132,7 @@ extension PeerService: MCNearbyServiceAdvertiserDelegate {
 }
 
 // MARK: - Browser Delegate
+
 extension PeerService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
@@ -146,6 +163,7 @@ extension PeerService: MCNearbyServiceBrowserDelegate {
 }
 
 // MARK: - Session Delegate
+
 extension PeerService: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
@@ -165,7 +183,13 @@ extension PeerService: MCSessionDelegate {
             messages.append(newMessage)
             NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
         } else {
-            let receivedText = String(decoding: data, as: UTF8.self) 
+            let receivedText = String(decoding: data, as: UTF8.self)
+            
+            if receivedText.isCustomNotification {
+                handleCustomNotification(receivedText, fromPeer: peerID)
+                return
+            }
+            
             let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedText)
             messages.append(newMessage)
             NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
@@ -182,5 +206,28 @@ extension PeerService: MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finished receiving a resource from: \(peerID)")
+    }
+}
+
+// MARK: - Custom Notification Handling
+
+extension PeerService {
+    
+    func handleCustomNotification(_ customNotification: String, fromPeer peerID: MCPeerID) {
+        if customNotification == String.messageDelivered {
+            NotificationCenter.default.post(name: Notification.Name.messageDelivered, object: nil, userInfo: ["sender" : peerID])
+            print("Delivered notification received")
+        } else if customNotification == String.messageSeen {
+            NotificationCenter.default.post(name: Notification.Name.messageSeen, object: nil, userInfo: ["sender" : peerID])
+            print("Seen notification received")
+        }
+    }
+    
+    func sendNotification(_ notification: String, to peerID: MCPeerID) {
+        do {
+            if let messageData = notification.data(using: .utf8) {
+                try PeerService.shared.session.send(messageData, toPeers: [peerID], with: .reliable)
+            }
+        } catch { return }
     }
 }

@@ -24,6 +24,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet private weak var roundedView: RoundedView!
     @IBOutlet private weak var timestampLabel: UILabel!
     @IBOutlet private weak var profilePicture: UIImageView?
+    var isSeen: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,9 +34,19 @@ class MessageTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Population
+// MARK: - ChatTableViewCell protocol
 
 extension MessageTableViewCell: ChatTableViewCell {
+    
+    func addSeenToTimestampLabel() {
+        if profilePicture != nil && isSeen == false {
+            timestampLabel.text = "\(timestampLabel.text ?? "") Seen"
+            isSeen = true
+        } else if isSeen == false {
+            timestampLabel.text = "Seen \(timestampLabel.text ?? "")"
+            isSeen = true
+        }
+    }
     
     func populateFrom(_ message: Message) {
         messageText.text = message.text

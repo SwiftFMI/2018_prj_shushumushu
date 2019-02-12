@@ -23,6 +23,7 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet private weak var profilePicture: UIImageView?
     @IBOutlet private weak var timestampLabel: UILabel!
+    var isSeen: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,9 +37,19 @@ class ImageTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Population
+// MARK: - ChatTableViewCell protocol
 
 extension ImageTableViewCell: ChatTableViewCell {
+    
+    func addSeenToTimestampLabel() {
+        if profilePicture != nil && isSeen == false {
+            timestampLabel.text = "\(timestampLabel.text ?? "") Seen"
+            isSeen = true
+        } else if isSeen == false {
+            timestampLabel.text = "Seen \(timestampLabel.text ?? "")"
+            isSeen = true
+        }
+    }
     
     func populateFrom(_ message: Message) {
         contentImageView.image = message.image

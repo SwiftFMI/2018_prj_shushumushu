@@ -40,3 +40,9 @@ extension CGAffineTransform {
         return (d > 0 ? 1 : -1) * sqrt (b*b + d*d)
     }
 }
+
+extension UInt8 {
+    var character: Character {
+        return Character(UnicodeScalar(self))
+    }
+}
