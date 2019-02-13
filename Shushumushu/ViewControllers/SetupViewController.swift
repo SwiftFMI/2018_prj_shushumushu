@@ -70,15 +70,23 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
     }
     
     @IBAction func proceed(_ sender: Any) {
-        if pickedImage.image != nil {
+        if pickedImage.image != nil && username.text != ""{
             UserDefaults.standard.set(username.text, forKey: "username")
             let pngImage = pickedImage.image!.pngData()
             UserDefaults.standard.set(pngImage, forKey: "profilePic")
             PeerService.shared = PeerService()
             performSegue(withIdentifier: "NearbyDevices", sender: nil)
-        } else {
-            let noPictureAlert = UIAlertController(title: "Oops", message: "You don't have a picture.", preferredStyle: .alert)
-            noPictureAlert.addAction(UIAlertAction(title: "Ok, I'll add one now :)", style: .default, handler: nil))
+        } else if pickedImage.image == nil && username.text == "" {
+            let noPictureAlert = UIAlertController(title: "Hold on", message: "You need to add a username and pick a profile picture.", preferredStyle: .alert)
+            noPictureAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(noPictureAlert, animated: true)
+        } else if pickedImage.image == nil {
+            let noPictureAlert = UIAlertController(title: "Hold on", message: "You need to pick a profile picture.", preferredStyle: .alert)
+            noPictureAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(noPictureAlert, animated: true)
+        } else if username.text == "" {
+            let noPictureAlert = UIAlertController(title: "Hold on", message: "You need to add a username.", preferredStyle: .alert)
+            noPictureAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(noPictureAlert, animated: true)
         }
     }

@@ -18,15 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RdJ-RL-kg2">
-                                <rect key="frame" x="50" y="221" width="275" height="275"/>
+                                <rect key="frame" x="87.5" y="310" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="275" id="8Xg-7r-6ER"/>
-                                    <constraint firstAttribute="width" secondItem="RdJ-RL-kg2" secondAttribute="height" multiplier="1:1" id="g2A-7C-Xmc"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="oXl-K5-2XO"/>
+                                    <constraint firstAttribute="width" constant="200" id="8Xg-7r-6ER"/>
+                                    <constraint firstAttribute="height" constant="200" id="oXl-K5-2XO"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yKj-Yw-e3x">
-                                <rect key="frame" x="55" y="157" width="265" height="40"/>
+                                <rect key="frame" x="55" y="246" width="265" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sfB-KR-0CR"/>
                                 </constraints>
@@ -34,14 +33,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShushuMushu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsQ-fP-xzo">
-                                <rect key="frame" x="90.5" y="96" width="194" height="37"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="31"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CompactLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-OS-ITM">
+                                <rect key="frame" x="0.5" y="72" width="374" height="162"/>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="yEd-ZR-9x1">
-                                <rect key="frame" x="60" y="520" width="255" height="105"/>
+                                <rect key="frame" x="60" y="534" width="255" height="105"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trs-Xv-Ekv">
                                         <rect key="frame" x="0.0" y="0.0" width="255" height="40"/>
@@ -74,9 +70,10 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXV-xz-h2C">
+                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-pd-7m6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9tQ-7H-Z9l">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="asl-ea-LnG">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
@@ -87,21 +84,16 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="yEd-ZR-9x1" firstAttribute="leading" secondItem="4AU-1r-hhO" secondAttribute="leading" constant="60" id="314-2L-1BI"/>
-                            <constraint firstItem="RdJ-RL-kg2" firstAttribute="top" secondItem="yKj-Yw-e3x" secondAttribute="bottom" constant="24" id="4Cx-bU-2w5"/>
                             <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yEd-ZR-9x1" secondAttribute="trailing" constant="60" id="6Um-lY-YT3"/>
                             <constraint firstItem="RdJ-RL-kg2" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="7Ou-4M-1I5"/>
-                            <constraint firstItem="iXV-xz-h2C" firstAttribute="trailing" secondItem="E1l-Zm-dcA" secondAttribute="trailing" id="8Jd-e5-2mn"/>
-                            <constraint firstItem="yKj-Yw-e3x" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="J8O-zr-sdR"/>
-                            <constraint firstItem="4AU-1r-hhO" firstAttribute="bottom" secondItem="yEd-ZR-9x1" secondAttribute="bottom" constant="42" id="Qee-2P-kCF"/>
-                            <constraint firstItem="nsQ-fP-xzo" firstAttribute="top" secondItem="4AU-1r-hhO" secondAttribute="top" constant="32" id="Xyy-Rx-u6n"/>
-                            <constraint firstItem="iXV-xz-h2C" firstAttribute="leading" secondItem="E1l-Zm-dcA" secondAttribute="leading" id="bVY-c1-34P"/>
-                            <constraint firstItem="yEd-ZR-9x1" firstAttribute="top" secondItem="RdJ-RL-kg2" secondAttribute="bottom" constant="24" id="bcx-qO-Tt3"/>
-                            <constraint firstItem="iXV-xz-h2C" firstAttribute="bottom" secondItem="E1l-Zm-dcA" secondAttribute="bottom" id="dql-NB-7ww"/>
-                            <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yKj-Yw-e3x" secondAttribute="trailing" constant="55" id="gaW-f2-7jt"/>
-                            <constraint firstItem="yKj-Yw-e3x" firstAttribute="leading" secondItem="4AU-1r-hhO" secondAttribute="leading" constant="55" id="iaB-nW-qeZ"/>
-                            <constraint firstItem="nsQ-fP-xzo" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="uiz-u2-aD5"/>
-                            <constraint firstItem="iXV-xz-h2C" firstAttribute="top" secondItem="E1l-Zm-dcA" secondAttribute="top" id="xFb-7C-K90"/>
-                            <constraint firstItem="yKj-Yw-e3x" firstAttribute="top" secondItem="nsQ-fP-xzo" secondAttribute="bottom" constant="24" id="yo2-XT-yr8"/>
+                            <constraint firstItem="yKj-Yw-e3x" firstAttribute="leading" secondItem="4AU-1r-hhO" secondAttribute="leading" constant="55" id="AOV-Ug-U4a"/>
+                            <constraint firstItem="zjy-OS-ITM" firstAttribute="top" secondItem="E1l-Zm-dcA" secondAttribute="top" constant="72" id="HHl-vR-WYj"/>
+                            <constraint firstItem="4AU-1r-hhO" firstAttribute="trailing" secondItem="yKj-Yw-e3x" secondAttribute="trailing" constant="55" id="O8w-d1-Raq"/>
+                            <constraint firstItem="4AU-1r-hhO" firstAttribute="bottom" secondItem="yEd-ZR-9x1" secondAttribute="bottom" constant="28" id="Qee-2P-kCF"/>
+                            <constraint firstItem="yEd-ZR-9x1" firstAttribute="top" secondItem="RdJ-RL-kg2" secondAttribute="bottom" constant="24" id="UnK-fd-OjO"/>
+                            <constraint firstItem="zjy-OS-ITM" firstAttribute="centerX" secondItem="E1l-Zm-dcA" secondAttribute="centerX" id="ZJn-LY-KQL"/>
+                            <constraint firstItem="RdJ-RL-kg2" firstAttribute="top" secondItem="yKj-Yw-e3x" secondAttribute="bottom" constant="24" id="d98-a6-UHX"/>
+                            <constraint firstItem="yKj-Yw-e3x" firstAttribute="top" secondItem="zjy-OS-ITM" secondAttribute="bottom" constant="12" id="hgY-mh-ytr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4AU-1r-hhO"/>
                         <connections>
@@ -116,7 +108,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="blurView" destination="iXV-xz-h2C" id="CM8-Do-9JZ"/>
+                        <outlet property="blurView" destination="eQf-pd-7m6" id="Uad-MB-lJl"/>
                         <outlet property="pickedImage" destination="RdJ-RL-kg2" id="fdc-td-Esy"/>
                         <outlet property="username" destination="yKj-Yw-e3x" id="vck-b4-TER"/>
                         <segue destination="yu7-ma-RAD" kind="show" identifier="NearbyDevices" id="zm7-Tc-evs"/>
@@ -912,5 +904,6 @@
     </scenes>
     <resources>
         <image name="CameraIcon" width="64" height="64"/>
+        <image name="CompactLogo" width="374" height="249"/>
     </resources>
 </document>
