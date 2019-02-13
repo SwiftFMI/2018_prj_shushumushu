@@ -9,21 +9,15 @@
 import UIKit
 import MultipeerConnectivity
 
-class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
+// MARK: - Class Definition
+
+class PeerTableViewController: UITableViewController   {
     let cellIdentifier = "PeerTableViewCell"
-    
-    func foundPeer() {
-        tableView.insertRows(at: [IndexPath(row: PeerService.shared.foundPeers.count - 1, section: 0)], with: .automatic)
-    }
-    
-    func lostPeer(at index: Int) {
-        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.setHidesBackButton(true, animated: true)
-        navigationItem.title = PeerService.shared.myPeerId.displayName
+        navigationItem.title = UserDefaults.standard.string(forKey: "username")
         PeerService.shared.delegate = self
     }
     
@@ -33,16 +27,40 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         navigationItem.title = PeerService.shared.myPeerId.displayName
     }
     
-    // MARK: - Table view data source
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChatViewController" {
+            let chatViewController = segue.destination as! ChatViewController
+            let participantMCPeerID = sender as! MCPeerID
+            chatViewController.chatPartner = participantMCPeerID
+        }
+    }
+}
 
+// MARK: - PeerServiceDelegate protocol
+
+extension PeerTableViewController: PeerServiceDelegate {
+    
+    func foundPeer() {
+        tableView.insertRows(at: [IndexPath(row: PeerService.shared.foundPeers.count - 1, section: 0)], with: .automatic)
+    }
+    
+    func lostPeer(at index: Int) {
+        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+}
+
+// MARK: - Table view data source
+
+extension PeerTableViewController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PeerService.shared.foundPeers.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PeerTableViewCell else {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
@@ -61,13 +79,5 @@ class PeerTableViewController: UITableViewController, PeerServiceDelegate   {
         
         PeerService.shared.serviceBrowser.invitePeer(selectedPeer, to: PeerService.shared.session, withContext: timestampData, timeout: 30)
         performSegue(withIdentifier: "ChatViewController", sender: selectedPeer)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ChatViewController" {
-            let chatViewController = segue.destination as! ChatViewController
-            let participantMCPeerID = sender as! MCPeerID
-            chatViewController.chatPartner = participantMCPeerID
-        }
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 import MultipeerConnectivity
 
 struct Peer {
+    
     var id: MCPeerID
     var profilePicture: UIImage
 }
@@ -111,6 +112,7 @@ extension PeerService {
 // MARK: - Advertiser Delegate
 
 extension PeerService: MCNearbyServiceAdvertiserDelegate {
+    
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print("Received invitation from peer \(peerID)")
         if let contextData = context {
@@ -134,6 +136,7 @@ extension PeerService: MCNearbyServiceAdvertiserDelegate {
 // MARK: - Browser Delegate
 
 extension PeerService: MCNearbyServiceBrowserDelegate {
+    
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
         //        let profilePic = UIImage(named: "default-profile-pic")
@@ -165,6 +168,7 @@ extension PeerService: MCNearbyServiceBrowserDelegate {
 // MARK: - Session Delegate
 
 extension PeerService: MCSessionDelegate {
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
@@ -229,5 +233,20 @@ extension PeerService {
                 try PeerService.shared.session.send(messageData, toPeers: [peerID], with: .reliable)
             }
         } catch { return }
+    }
+}
+
+// MARK: - Logging Out
+
+extension PeerService {
+    
+    static func logOut() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+        PeerService.shared.serviceAdvertiser.stopAdvertisingPeer()
+        PeerService.shared.serviceBrowser.stopBrowsingForPeers()
     }
 }

@@ -37,8 +37,8 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
         
         pickedImage.layer.cornerRadius = pickedImage.frame.size.width / 2
         pickedImage.layer.masksToBounds = true
+        navigationItem.setHidesBackButton(true, animated: true)
     }
-    
     
     @IBAction func takePhoto(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -74,6 +74,7 @@ class SetupViewController: UIViewController, UINavigationControllerDelegate, UII
             UserDefaults.standard.set(username.text, forKey: "username")
             let pngImage = pickedImage.image!.pngData()
             UserDefaults.standard.set(pngImage, forKey: "profilePic")
+            PeerService.shared = PeerService()
             performSegue(withIdentifier: "NearbyDevices", sender: nil)
         } else {
             let noPictureAlert = UIAlertController(title: "Oops", message: "You don't have a picture.", preferredStyle: .alert)
