@@ -66,6 +66,16 @@ extension ChatInputViewController {
         updateSendButtonAppearance()
     }
     
+    @IBAction func galleryButtonTapped(_ sender: Any) {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        
+        let libraryPicker = UIImagePickerController()
+        libraryPicker.delegate = self
+        libraryPicker.sourceType = .photoLibrary
+        libraryPicker.allowsEditing = true
+        self.present(libraryPicker, animated: true, completion: nil)
+    }
+    
     @objc private func textFieldDidChangeAction(_ textfield: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + (textfield.text != "" ? 0 : 0.5)) { [weak self] in
             self?.updateSendButtonAppearance()

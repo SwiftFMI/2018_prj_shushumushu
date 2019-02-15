@@ -64,8 +64,10 @@ extension ChatViewController: ChatInputViewControllerDelegate {
             
             chatTableView.insertRows(at: [IndexPath(row: chatTableView.numberOfRows(inSection: 0), section: 0)], with: .automatic)
             scrollToBottom(true)
-            
-        } catch { showError(withMessage: error.localizedDescription) }
+        } catch {
+            printError(withMessage: error.localizedDescription)
+            showAlert(withMessage: error.localizedDescription)
+        }
     }
 }
 
@@ -205,7 +207,7 @@ extension ChatViewController {
     /// Presents alert with error message.
     ///
     /// - Parameter message: the error message.
-    private func showError(withMessage message: String = "An Error has occured") {
+    private func printError(withMessage message: String = "An Error has occured") {
         print(message)
     }
     
@@ -250,6 +252,24 @@ extension Message {
         case .emojiOnly: return isSendByLocalUser ? EmojiTableViewCell.sentIdentifier   : EmojiTableViewCell.receivedIdentifier
         case .text:      return isSendByLocalUser ? MessageTableViewCell.sentIdentifier : MessageTableViewCell.receivedIdentifier
         case .image:     return isSendByLocalUser ? ImageTableViewCell.sentIdentifier   : ImageTableViewCell.receivedIdentifier
+        }
+    }
+}
+
+// MARK: Alerts
+
+extension ChatViewController {
+    
+    func showAlert(withMessage message: String) {
+        let alertController = UIAlertController(title: "Warning", message: "An error occured regarding your connectivity with your chat partner", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Okay", style: .cancel) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true) {
+            // ...
         }
     }
 }

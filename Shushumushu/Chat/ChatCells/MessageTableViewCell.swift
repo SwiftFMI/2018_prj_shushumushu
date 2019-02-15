@@ -41,6 +41,7 @@ extension MessageTableViewCell: ChatTableViewCell {
     
     func setSeen(to isSeen: Bool) {
         self.isSeen = isSeen
+        updateSeenLabelVisibility()
     }
     
     func updateSeenLabelVisibility() {

@@ -73,11 +73,8 @@ extension PeerTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var nowInterval = Date().timeIntervalSince1970
-        let timestampData = Data(bytes: &nowInterval, count: MemoryLayout<TimeInterval>.size)
         let selectedPeer = PeerService.shared.foundPeers[indexPath.row].id
-        
-        PeerService.shared.serviceBrowser.invitePeer(selectedPeer, to: PeerService.shared.session, withContext: timestampData, timeout: 30)
+        PeerService.shared.serviceBrowser.invitePeer(selectedPeer, to: PeerService.shared.session, withContext: nil, timeout: 30)
         performSegue(withIdentifier: "ChatViewController", sender: selectedPeer)
     }
 }
