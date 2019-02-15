@@ -102,9 +102,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChatViewController {
     
     @objc func messagesSeenAction(notification: NSNotification) {
-        
-        DispatchQueue.main.async {
-            (self.chatTableView.cellForRow(at: IndexPath(row: PeerService.shared.indexOfLastMessageSentByMe(with: self.chatPartner!), section: 0)) as? ChatTableViewCell)?.addSeenToTimestampLabel()
+        DispatchQueue.main.async { [weak self] in
+            (self!.chatTableView.cellForRow(at: IndexPath(row: PeerService.shared.indexOfLastMessageSentByMe(with: self!.chatPartner!), section: 0)) as? ChatTableViewCell)?.setSeen(to: true)
+            
+            for index in stride(from: PeerService.shared.indexOfLastMessageSentByMe(with: self!.chatPartner!) - 1, through: 0, by: -1) {
+                if PeerService.shared.messages[index].sender == PeerService.shared.myPeerId && PeerService.shared.messages[index].receiver == self!.chatPartner {
+                    (self!.chatTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? ChatTableViewCell)?.setSeen(to: false)
+                }
+            }
         }
     }
 }

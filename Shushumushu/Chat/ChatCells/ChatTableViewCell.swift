@@ -16,7 +16,8 @@ protocol ChatTableViewCell: class {
     
     /// Common interface for population of chat screen's cells.
     func populateFrom(_ message: Message)
-    func addSeenToTimestampLabel()
+    func updateSeenLabelVisibility()
+    func setSeen(to isSeen: Bool)
 }
 
 // MARK: Helper Methods

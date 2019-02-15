@@ -24,6 +24,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet private weak var roundedView: RoundedView!
     @IBOutlet private weak var timestampLabel: UILabel!
     @IBOutlet private weak var profilePicture: UIImageView?
+    @IBOutlet weak var seenLabel: UILabel!    
     var isSeen: Bool = false
     
     override func awakeFromNib() {
@@ -38,13 +39,13 @@ class MessageTableViewCell: UITableViewCell {
 
 extension MessageTableViewCell: ChatTableViewCell {
     
-    func addSeenToTimestampLabel() {
-        if profilePicture != nil && isSeen == false {
-            timestampLabel.text = "\(timestampLabel.text ?? "") Seen"
-            isSeen = true
-        } else if isSeen == false {
-            timestampLabel.text = "Seen \(timestampLabel.text ?? "")"
-            isSeen = true
+    func setSeen(to isSeen: Bool) {
+        self.isSeen = isSeen
+    }
+    
+    func updateSeenLabelVisibility() {
+        if profilePicture == nil {
+            seenLabel.isHidden = !isSeen
         }
     }
     

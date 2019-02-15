@@ -23,6 +23,8 @@ class EmojiTableViewCell: UITableViewCell {
     @IBOutlet private weak var profilePicture: UIImageView?
     @IBOutlet private weak var emojiSymbols: UILabel!
     @IBOutlet private weak var timestampLabel: UILabel!
+    @IBOutlet weak var seenLabel: UILabel!
+    
     var isSeen: Bool = false
     
     override func awakeFromNib() {
@@ -38,13 +40,14 @@ class EmojiTableViewCell: UITableViewCell {
 
 extension EmojiTableViewCell: ChatTableViewCell {
     
-    func addSeenToTimestampLabel() {
-        if profilePicture != nil && isSeen == false {
-            timestampLabel.text = "\(timestampLabel.text ?? "") Seen"
-            isSeen = true
-        } else if isSeen == false {
-            timestampLabel.text = "Seen \(timestampLabel.text ?? "")"
-            isSeen = true
+    func setSeen(to isSeen: Bool) {
+        self.isSeen = isSeen
+        updateSeenLabelVisibility()
+    }
+    
+    func updateSeenLabelVisibility() {
+        if profilePicture == nil {
+            seenLabel.isHidden = !isSeen
         }
     }
     
