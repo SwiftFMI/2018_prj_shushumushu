@@ -19,6 +19,7 @@ class PeerTableViewController: UITableViewController   {
         navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.title = UserDefaults.standard.string(forKey: "username")
         PeerService.shared.delegate = self
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +34,16 @@ class PeerTableViewController: UITableViewController   {
             let participantMCPeerID = sender as! MCPeerID
             chatViewController.chatPartner = participantMCPeerID
         }
+    }
+}
+
+// MARK: - Pull to refresh
+
+extension PeerTableViewController {
+    
+    @objc func refresh() {
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
 }
 
