@@ -70,7 +70,7 @@ class PeerService: NSObject {
             }
         }
         
-        self.foundPeers.append(peer)
+        foundPeers.append(peer)
         delegate?.foundPeer()
     }
     
@@ -140,9 +140,8 @@ extension PeerService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer with id: \(peerID)")
         //        let profilePic = UIImage(named: "default-profile-pic")
-        let profilePictureData = UserDefaults.standard.data(forKey: "profilePic")!
-        
-        browser.invitePeer(peerID, to: self.session, withContext: profilePictureData, timeout: 10)
+        guard let profilePictureData = UserDefaults.standard.data(forKey: "profilePic") else { return }
+        browser.invitePeer(peerID, to: session, withContext: profilePictureData, timeout: 10)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -182,12 +181,11 @@ extension PeerService: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Received data: \(data) from: \(peerID)")
-        if let receivedImage = UIImage(data: data){
+        if let receivedImage = UIImage(data: data) {
             let newMessage = Message(sender: peerID, receiver: myPeerId, image: receivedImage)
             messages.append(newMessage)
-            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
-        } else {
-            let receivedText = String(decoding: data, as: UTF8.self)
+            NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: ["message" : newMessage])
+        } else if let receivedText = String(data: data, encoding: .utf8) {
             
             if receivedText.isCustomNotification {
                 handleCustomNotification(receivedText, fromPeer: peerID)
@@ -196,7 +194,7 @@ extension PeerService: MCSessionDelegate {
             
             let newMessage = Message(sender: peerID, receiver: myPeerId, text: receivedText)
             messages.append(newMessage)
-            NotificationCenter.default.post(name: Notification.Name.messageReceived, object: nil, userInfo: ["message" : newMessage])
+            NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: ["message" : newMessage])
         }
     }
     

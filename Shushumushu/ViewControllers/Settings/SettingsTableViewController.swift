@@ -47,26 +47,21 @@ extension SettingsTableViewController {
     @IBAction func logOutAction(_ sender: Any) {
         let alertController = UIAlertController(title: "Warning", message: "Logging out will result in loss of all your chats with nearby peers", preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            print("cancel")
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
         
-        let destroyAction = UIAlertAction(title: "Log out", style: .destructive) { (action) in
+        let destroyAction = UIAlertAction(title: "Log out", style: .destructive) { [weak self] (action) in
             PeerService.logOut()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "setupViewController")
-            self.navigationController?.popToRootViewController(animated: true)
-            self.navigationController!.pushViewController(vc, animated: true)
+            self?.navigationController?.popToRootViewController(animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         alertController.addAction(destroyAction)
-        
-        present(alertController, animated: true) {
-            // ...
-        }
+        present(alertController, animated: true)
     }
     
     @IBAction func doneTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }

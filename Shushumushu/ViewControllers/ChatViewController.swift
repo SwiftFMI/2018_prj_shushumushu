@@ -83,6 +83,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         let message = PeerService.shared.messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: message.messageCellIdentifier, for: indexPath)
         (cell as? ChatTableViewCell)?.populateFrom(message)
+        (cell as? ImageTableViewCell)?.delegate = self
         return cell
     }
     
@@ -150,7 +151,8 @@ extension ChatViewController {
             let keyboardHeight = keyboardRectangle.height
             let isKeboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             
-            tableViewBottomConstraint.constant = isKeboardShowing ? (keyboardHeight + 48) : 48
+            let keyBoardShownHeight = 48 - view.safeAreaInsets.bottom + keyboardHeight
+            tableViewBottomConstraint.constant = isKeboardShowing ? keyBoardShownHeight : 48
             chatTableView.updateConstraints()
             
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: { [weak self] in
@@ -163,6 +165,16 @@ extension ChatViewController {
     }
 }
 
+// MARK: - ImageTableViewCellDelegate
+
+extension ChatViewController: ImageTableViewCellDelegate {
+    
+    func imageTableViewCell(_ imageTableViewCell: ImageTableViewCell, didTapImage image: UIImage) {
+        guard let vc = ImagePreviewViewController.instanceFor(image) else { return }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
 // MARK: - Force Touch Delegate
 
 extension ChatViewController: UIViewControllerPreviewingDelegate {
@@ -170,10 +182,8 @@ extension ChatViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = chatTableView.indexPathForRow(at: location) {
             if let cell = chatTableView.cellForRow(at: indexPath) as? ImageTableViewCell {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController
+                let vc = ImagePreviewViewController.instanceFor(cell.contentImageView.image)
                 previewingContext.sourceRect = cell.convert(cell.contentImageView.frame, to: chatTableView)
-                vc?.image = cell.contentImageView.image
                 return vc
             }
         }
@@ -194,16 +204,7 @@ extension ChatViewController {
         let locationInView = view.convert(location, from: view)
         return view.bounds.contains(locationInView)
     }
-    
-    /// Sets up an 'ImagePreviewViewController' for force touch
-    ///
-    /// - Parameter image: the image to preview
-    private func viewControllerFor(image: UIImage?) -> UIViewController {
-        let imagePreviewVC = ImagePreviewViewController()
-        imagePreviewVC.previewedImageView?.image = image
-        return imagePreviewVC
-    }
-    
+
     /// Presents alert with error message.
     ///
     /// - Parameter message: the error message.
@@ -268,8 +269,6 @@ extension ChatViewController {
         }
         alertController.addAction(cancelAction)
         
-        present(alertController, animated: true) {
-            // ...
-        }
+        present(alertController, animated: true)
     }
 }

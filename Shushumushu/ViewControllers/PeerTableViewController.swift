@@ -19,7 +19,8 @@ class PeerTableViewController: UITableViewController   {
         navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.title = UserDefaults.standard.string(forKey: "username")
         PeerService.shared.delegate = self
-        self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.tableFooterView = UIView()
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,8 +43,8 @@ class PeerTableViewController: UITableViewController   {
 extension PeerTableViewController {
     
     @objc func refresh() {
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
+        tableView.reloadData()
+        refreshControl?.endRefreshing()
     }
 }
 
@@ -77,7 +78,7 @@ extension PeerTableViewController {
             fatalError("The dequeued cell is not an instance of PeerTableViewCell")
         }
         
-        let peer: Peer = PeerService.shared.foundPeers[indexPath.row]
+        let peer = PeerService.shared.foundPeers[indexPath.row]
         cell.peerName.text = peer.id.displayName
         cell.profilePicture.image = peer.profilePicture
         return cell
