@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var visibilitySwitch: UISwitch!
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var selectedEmoji: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,6 +28,7 @@ class SettingsTableViewController: UITableViewController {
         
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.layer.masksToBounds = true
+        selectedEmoji.text = PeerService.shared.selectedEmoji
     }
 }
 
@@ -45,7 +47,7 @@ extension SettingsTableViewController {
     }
     
     @IBAction func logOutAction(_ sender: Any) {
-        let alertController = UIAlertController(title: "Warning", message: "Logging out will result in loss of all your chats with nearby peers", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Warning", message: "Logging out will result in loss of all your chats with nearby peers", preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
@@ -63,5 +65,35 @@ extension SettingsTableViewController {
     
     @IBAction func doneTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    @IBAction func didTapSelectEmoji(_ sender: UITapGestureRecognizer) {
+        let alertController = UIAlertController(title: "", message: "Select emoji", preferredStyle: .actionSheet)
+        
+        let likeButton = UIAlertAction(title: "👍", style: .default, handler: { (action) -> Void in
+            PeerService.shared.selectedEmoji = "👍"
+            self.selectedEmoji.text = PeerService.shared.selectedEmoji
+        })
+        
+        
+        let laughingEmoji = UIAlertAction(title: "😃", style: .default, handler: { (action) -> Void in
+            PeerService.shared.selectedEmoji = "😃"
+            self.selectedEmoji.text = PeerService.shared.selectedEmoji
+        })
+        
+        
+        let heartEmoji = UIAlertAction(title: "❤️", style: .default, handler: { (action) -> Void in
+            PeerService.shared.selectedEmoji = "❤️"
+            self.selectedEmoji.text = PeerService.shared.selectedEmoji
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(likeButton)
+        alertController.addAction(laughingEmoji)
+        alertController.addAction(heartEmoji)
+        alertController.addAction(cancel)
+        
+        
+        
+        present(alertController, animated: true)
     }
 }

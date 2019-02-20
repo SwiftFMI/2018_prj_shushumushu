@@ -41,6 +41,7 @@ class PeerService: NSObject {
     
     var foundPeers: [Peer] = []
     var messages = [Message]()
+    var selectedEmoji = "👍"
     
     weak var delegate: PeerServiceDelegate?
     

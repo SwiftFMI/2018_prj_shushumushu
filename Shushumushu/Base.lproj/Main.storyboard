@@ -751,34 +751,70 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="1uo-0w-JNb" userLabel="Log out">
+                            <tableViewSection headerTitle="Chat Settings" id="bqa-Dc-uCB">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logOut" id="xvs-dK-G24">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="toggleVisibility" id="U3P-Q2-FP2" userLabel="selectEmoji">
+                                        <rect key="frame" x="0.0" y="475.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xvs-dK-G24" id="0uO-PS-5N2">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U3P-Q2-FP2" id="ljY-SV-jrq">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-VV-tvt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1E-hm-DL6">
+                                                    <rect key="frame" x="16" y="11.5" width="94" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFJ-3O-IdX">
+                                                    <rect key="frame" x="323" y="5" width="32" height="33.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="b1E-hm-DL6" firstAttribute="leading" secondItem="ljY-SV-jrq" secondAttribute="leadingMargin" id="8Eh-lz-1EH"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZFJ-3O-IdX" secondAttribute="trailing" constant="20" id="H5Z-oQ-xvY"/>
+                                                <constraint firstItem="b1E-hm-DL6" firstAttribute="centerY" secondItem="ljY-SV-jrq" secondAttribute="centerY" id="n4c-mW-q61"/>
+                                                <constraint firstItem="ZFJ-3O-IdX" firstAttribute="centerY" secondItem="ljY-SV-jrq" secondAttribute="centerY" id="nHa-WL-wjU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="yYO-fe-aB9" appends="YES" id="6fW-3p-h0R"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="6RF-Lz-OIC" userLabel="Log out">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logOut" id="asa-zm-tMI">
+                                        <rect key="frame" x="0.0" y="555.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="asa-zm-tMI" id="BpN-NJ-L7b">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whP-ke-bpj">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="LHB-Sx-AuL"/>
+                                                        <constraint firstAttribute="height" constant="45" id="bGT-yO-Crb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Log out">
                                                         <color key="titleColor" red="0.0" green="0.51764705879999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="logOutAction:" destination="jJz-Jk-I9b" eventType="touchUpInside" id="Ipg-ZM-YvG"/>
+                                                        <action selector="logOutAction:" destination="jJz-Jk-I9b" eventType="touchUpInside" id="miV-3S-23r"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="F2P-VV-tvt" firstAttribute="leading" secondItem="0uO-PS-5N2" secondAttribute="leading" id="NKG-o5-NnJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="F2P-VV-tvt" secondAttribute="trailing" id="Tdg-jf-phd"/>
-                                                <constraint firstAttribute="bottom" secondItem="F2P-VV-tvt" secondAttribute="bottom" id="gDq-Jx-7Qs"/>
-                                                <constraint firstItem="F2P-VV-tvt" firstAttribute="top" secondItem="0uO-PS-5N2" secondAttribute="top" id="vgG-8P-qlI"/>
+                                                <constraint firstAttribute="trailing" secondItem="whP-ke-bpj" secondAttribute="trailing" id="3om-B0-1EP"/>
+                                                <constraint firstItem="whP-ke-bpj" firstAttribute="top" secondItem="BpN-NJ-L7b" secondAttribute="top" id="C56-DL-VJu"/>
+                                                <constraint firstAttribute="bottom" secondItem="whP-ke-bpj" secondAttribute="bottom" id="J7a-jM-NAo"/>
+                                                <constraint firstItem="whP-ke-bpj" firstAttribute="leading" secondItem="BpN-NJ-L7b" secondAttribute="leading" id="P8D-Ya-FgJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -802,6 +838,7 @@
                     <connections>
                         <outlet property="deviceName" destination="L0u-XZ-Fkl" id="CDC-AS-g4v"/>
                         <outlet property="profilePicture" destination="PvL-gE-2kp" id="Ykp-oc-KJo"/>
+                        <outlet property="selectedEmoji" destination="ZFJ-3O-IdX" id="fm4-kc-25C"/>
                         <outlet property="visibilitySwitch" destination="8rz-gD-725" id="M21-MZ-MJS"/>
                     </connections>
                 </tableViewController>
@@ -813,6 +850,11 @@
                         <navigationItem title="Settings" id="MPl-gM-utm"/>
                     </items>
                 </navigationBar>
+                <tapGestureRecognizer id="yYO-fe-aB9">
+                    <connections>
+                        <action selector="didTapSelectEmoji:" destination="jJz-Jk-I9b" id="3X0-I3-7Pi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2679.1999999999998" y="106.59670164917542"/>
         </scene>

@@ -56,7 +56,7 @@ extension ChatInputViewController {
         vibration.impactOccurred()
 
         let textFieldText = textField.text ?? ""
-        let message = textFieldText == "" ? "👍" : textFieldText
+        let message = textFieldText == "" ? PeerService.shared.selectedEmoji : textFieldText
         
         if let messageData = message.data(using: .utf8) {
             delegate?.chatInputViewController(self, wantsToSendData: messageData)
@@ -102,7 +102,7 @@ extension ChatInputViewController {
     private func updateSendButtonAppearance() {
         
         UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: { [weak self] in
-            self?.sendButton.setTitle(self?.textField.text != "" ? "Send" : "👍", for: .normal)
+            self?.sendButton.setTitle(self?.textField.text != "" ? "Send" : PeerService.shared.selectedEmoji, for: .normal)
             self?.sendButton.titleLabel?.font = self?.textField.text != "" ? .boldSystemFont(ofSize: 18) : .boldSystemFont(ofSize: 36)
             self?.sendButton.backgroundColor = self?.textField.text != "" ?  UIColor(red: 0, green: 0.51, blue: 1, alpha: 1) : UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             if self?.textField.text != "" { self?.sendButton.setValue(1, forKey: "borderWidth") } else { self?.sendButton.setValue(0, forKey: "borderWidth") }
