@@ -14,6 +14,7 @@ class ColorPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCheckVisibilities()
         NotificationCenter.default.addObserver(self, selector: #selector(colorChanged), name: .colorChanged, object: nil)
     }
     
@@ -49,5 +50,25 @@ extension ColorPickerViewController {
         PeerService.shared.selectedChatColor = sender.view?.backgroundColor ?? PeerService.shared.selectedChatColor
         NotificationCenter.default.post(Notification(name: .colorChanged, object: nil))
         sender.view?.subviews[0].isHidden = false
+    }
+}
+
+// MARK: - Helpers
+
+extension ColorPickerViewController {
+    
+    func setCheckVisibilities() {
+        var didShowCheck = false
+        
+        for view in colorRoundedViews {
+            for subview in view.subviews {
+                if (view.backgroundColor == PeerService.shared.selectedChatColor) {
+                    subview.isHidden = false
+                    didShowCheck = true
+                }
+            }
+        }
+        
+        colorRoundedViews[0].subviews[0].isHidden = didShowCheck
     }
 }
