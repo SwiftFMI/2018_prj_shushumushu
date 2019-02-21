@@ -17,6 +17,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var visibilitySwitch: UISwitch!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var selectedEmoji: UILabel!
+    @IBOutlet weak var pickChatColorRoundedView: RoundedView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,10 +30,17 @@ class SettingsTableViewController: UITableViewController {
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.layer.masksToBounds = true
         selectedEmoji.text = PeerService.shared.selectedEmoji
+        pickChatColorRoundedView.backgroundColor = PeerService.shared.selectedChatColor
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        pickChatColorRoundedView.backgroundColor = PeerService.shared.selectedChatColor
+
     }
 }
 
 // MARK: - User Interactions
+
 extension SettingsTableViewController {
     
     @IBAction func didChangeVisibility(_ sender: UISwitch) {
@@ -75,24 +83,21 @@ extension SettingsTableViewController {
             self.selectedEmoji.text = PeerService.shared.selectedEmoji
         })
         
-        
         let laughingEmoji = UIAlertAction(title: "😃", style: .default, handler: { (action) -> Void in
             PeerService.shared.selectedEmoji = "😃"
             self.selectedEmoji.text = PeerService.shared.selectedEmoji
         })
         
-        
         let heartEmoji = UIAlertAction(title: "❤️", style: .default, handler: { (action) -> Void in
             PeerService.shared.selectedEmoji = "❤️"
             self.selectedEmoji.text = PeerService.shared.selectedEmoji
         })
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(likeButton)
         alertController.addAction(laughingEmoji)
         alertController.addAction(heartEmoji)
         alertController.addAction(cancel)
-        
-        
         
         present(alertController, animated: true)
     }

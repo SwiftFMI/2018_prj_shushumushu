@@ -13,6 +13,8 @@
 		4308E62A219894A200B69050 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4308E628219894A200B69050 /* LaunchScreen.storyboard */; };
 		4308E6322198C74D00B69050 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E6312198C74D00B69050 /* RoundedView.swift */; };
 		4308E6382198CF7600B69050 /* PeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E6372198CF7600B69050 /* PeerTableViewCell.swift */; };
+		430EB3A4221E934E00F6C674 /* ExampleChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430EB3A3221E934E00F6C674 /* ExampleChatTableViewController.swift */; };
+		430EB3A6221F0C7700F6C674 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430EB3A5221F0C7700F6C674 /* ColorPickerViewController.swift */; };
 		43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475AC921E3CDD3006F5B8C /* Message.swift */; };
 		43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43475ACF21E69EB3006F5B8C /* ChatViewController.swift */; };
 		434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434772C421F8F0050002FA5C /* String+Emoji.swift */; };
@@ -42,6 +44,8 @@
 		4308E62B219894A200B69050 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4308E6312198C74D00B69050 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		4308E6372198CF7600B69050 /* PeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTableViewCell.swift; sourceTree = "<group>"; };
+		430EB3A3221E934E00F6C674 /* ExampleChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleChatTableViewController.swift; sourceTree = "<group>"; };
+		430EB3A5221F0C7700F6C674 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		43475AC921E3CDD3006F5B8C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		43475ACF21E69EB3006F5B8C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		434772C421F8F0050002FA5C /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				43F7E30A219B0327000BBCDD /* SettingsTableViewController.swift */,
+				430EB3A5221F0C7700F6C674 /* ColorPickerViewController.swift */,
+				430EB3A3221E934E00F6C674 /* ExampleChatTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -255,12 +261,14 @@
 				E5C6EFC621F095D50028662F /* SetupViewController.swift in Sources */,
 				434772C521F8F0050002FA5C /* String+Emoji.swift in Sources */,
 				43F7E30B219B0327000BBCDD /* SettingsTableViewController.swift in Sources */,
+				430EB3A4221E934E00F6C674 /* ExampleChatTableViewController.swift in Sources */,
 				43E964002204E82D002B16F5 /* MCPeerID+Reusable.swift in Sources */,
 				43905FAD2207A01F000BA68C /* MessageTableViewCell.swift in Sources */,
 				4308E620219894A100B69050 /* AppDelegate.swift in Sources */,
 				43905FB02207A01F000BA68C /* ImageTableViewCell.swift in Sources */,
 				43905FB82207A75F000BA68C /* RoundedButton.swift in Sources */,
 				43475ACA21E3CDD3006F5B8C /* Message.swift in Sources */,
+				430EB3A6221F0C7700F6C674 /* ColorPickerViewController.swift in Sources */,
 				4308E6322198C74D00B69050 /* RoundedView.swift in Sources */,
 				43475AD021E69EB3006F5B8C /* ChatViewController.swift in Sources */,
 				43905FB52207A05A000BA68C /* Helpers.swift in Sources */,

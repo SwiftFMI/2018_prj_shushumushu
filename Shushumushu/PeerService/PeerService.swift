@@ -42,7 +42,8 @@ class PeerService: NSObject {
     var foundPeers: [Peer] = []
     var messages = [Message]()
     var selectedEmoji = "👍"
-    
+    var selectedChatColor = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
+        
     weak var delegate: PeerServiceDelegate?
     
     override init() {

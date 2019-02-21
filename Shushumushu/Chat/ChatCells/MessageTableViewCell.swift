@@ -29,9 +29,9 @@ class MessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        roundedView.roundedCorners = 12 * CGFloat(integerLiteral: messageText.calculateMaxLines)
         profilePicture?.layer.cornerRadius = (profilePicture?.frame.size.width ?? 0) / 2
         profilePicture?.layer.masksToBounds = true
+        roundedView.backgroundColor = (profilePicture != nil) ? roundedView.backgroundColor : PeerService.shared.selectedChatColor
     }
 }
 

@@ -104,7 +104,7 @@ extension ChatInputViewController {
         UIView.transition(with: sendButton, duration: 0.3, options: [.curveEaseIn, .transitionCrossDissolve], animations: { [weak self] in
             self?.sendButton.setTitle(self?.textField.text != "" ? "Send" : PeerService.shared.selectedEmoji, for: .normal)
             self?.sendButton.titleLabel?.font = self?.textField.text != "" ? .boldSystemFont(ofSize: 18) : .boldSystemFont(ofSize: 36)
-            self?.sendButton.backgroundColor = self?.textField.text != "" ?  UIColor(red: 0, green: 0.51, blue: 1, alpha: 1) : UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+            self?.sendButton.backgroundColor = self?.textField.text != "" ?  PeerService.shared.selectedChatColor : UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             if self?.textField.text != "" { self?.sendButton.setValue(1, forKey: "borderWidth") } else { self?.sendButton.setValue(0, forKey: "borderWidth") }
         })
     }
